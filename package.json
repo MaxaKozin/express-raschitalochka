@@ -4,6 +4,8 @@
   "description": "raschitalocha backend",
   "main": "index.js",
   "dependencies": {
+    "@reduxjs/toolkit": "^1.4.0",
+    "axios": "^0.21.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
