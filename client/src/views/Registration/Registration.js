@@ -1,6 +1,5 @@
 import React, { useRef, useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import { NavLink } from 'react-router-dom';
 import { authOperations } from '../../redux/auth';
 import emailValidate from '../../services/emailValidate';
 import PasswordStrengthBar from 'react-password-strength-bar';
