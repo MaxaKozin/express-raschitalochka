@@ -1,17 +1,13 @@
-import React, { useRef, useState, useEffect, useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useRef, useState, useCallback } from 'react';
+import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { authOperations, authSelectors } from '../../redux/auth';
-import * as routes from '../../constants/routes';
-import { Media, Notification } from '../../common';
+import { authOperations } from '../../redux/auth';
 import emailValidate from '../../services/emailValidate';
 import PasswordStrengthBar from 'react-password-strength-bar';
-import { ToastContainer } from 'react-toastify';
 
-import 'react-toastify/dist/ReactToastify.css';
 import styles from './Registration.module.css';
-import icon from '../../assets/icons/logo.svg';
-import { clearError } from '../../redux/auth/auth-actions';
+// import icon from '../../assets/icons/logo.svg';
+// import { clearError } from '../../redux/auth/auth-actions';
 
 export default function Registration() {
   const dispatch = useDispatch();
@@ -68,19 +64,19 @@ export default function Registration() {
     confirmPassword.current.value = '';
   };
 
-  const error = useSelector(state => state.);
-  const token = useSelector(authSelectors.getToken);
+  // const error = useSelector(state => state.error);
+  // const token = useSelector(state => state.token);
 
-  useEffect(() => {
-    Notification('error', error, 2000);
-    if (error) dispatch(clearError());
-  }, [error, dispatch]);
+  // useEffect(() => {
+  //   Notification('error', error, 2000);
+  //   if (error) dispatch(clearError());
+  // }, [error, dispatch]);
 
-  useEffect(() => {
-    if (token) {
-      Notification('success', 'Registration successful!', 2000);
-    }
-  }, [token]);
+  // useEffect(() => {
+  //   if (token) {
+  //     Notification('success', 'Registration successful!', 2000);
+  //   }
+  // }, [token]);
 
   const onSubmitHandler = async e => {
     e.preventDefault();
@@ -108,7 +104,7 @@ export default function Registration() {
 
   return (
     <div className={styles.pageWrap}>
-      <Media device="desktop">
+      {/* <Media device="desktop">
         <div className={styles.leftSide}>
           <div className={styles.appNameContainer}>
             <svg className={styles.icon}>
@@ -121,18 +117,18 @@ export default function Registration() {
             <span>categories of costs</span>
           </h2>
         </div>
-      </Media>
+      </Media> */}
       <div className={styles.registerWrap}>
         <div className={styles.registerBlock}>
           <div className={styles.container}>
-            <Media device="mobile">
+            {/* <Media device="mobile">
               <div className={styles.logo}></div>
               <span className={styles.projectName}>Raschitalochka</span>
-            </Media>
+            </Media> */}
 
-            <Media device="fromTablet">
+            {/* <Media device="fromTablet">
               <h2 className={styles.title}>Registration</h2>
-            </Media>
+            </Media> */}
             <form
               className={styles.registerForm}
               onSubmit={onSubmitHandler}
@@ -205,13 +201,12 @@ export default function Registration() {
                 Register
               </button>
             </form>
-            <NavLink className={styles.loginLink} exact to={routes.LOGIN}>
+            <NavLink className={styles.loginLink} exact to={'/login'}>
               Login
             </NavLink>
           </div>
         </div>
       </div>
-      <ToastContainer />
     </div>
   );
 }

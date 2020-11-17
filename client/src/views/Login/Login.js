@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from 'react';
+import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 // import { NavLink } from 'react-router-dom';
 import { authOperations } from '../../redux/auth';
@@ -119,9 +120,9 @@ export default function Login() {
               Enter
             </button>
           </form>
-          {/* <NavLink className={styles.regLink} exact to={'/register'}>
+          <NavLink className={styles.regLink} exact to={'/register'}>
             Register
-          </NavLink> */}
+          </NavLink>
         </div>
       </div>
 
