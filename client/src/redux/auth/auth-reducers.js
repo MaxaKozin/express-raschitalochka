@@ -3,27 +3,27 @@ import { createReducer } from '@reduxjs/toolkit';
 import {
   getError,
   clearError,
-  registerRequest,
-  registerSuccess,
+  // registerRequest,
+  // registerSuccess,
   loginRequest,
   loginSuccess,
-  logoutSuccess,
-  getCurrentUserRequest,
-  getCurrentUserSuccess,
+  // logoutSuccess,
+  // getCurrentUserRequest,
+  // getCurrentUserSuccess,
 } from './auth-actions';
 
 const initialUserState = { name: null, email: null };
 
 const user = createReducer(initialUserState, {
-  [registerSuccess]: () => initialUserState,
+  // [registerSuccess]: (_, { payload }) => payload.user,
   [loginSuccess]: (_, { payload }) => payload.user,
-  [logoutSuccess]: () => initialUserState,
+  // [logoutSuccess]: () => initialUserState,
 });
 
 const token = createReducer(null, {
-  [registerSuccess]: () => null,
+  // [registerSuccess]: (_, { payload }) => payload.token,
   [loginSuccess]: (_, { payload }) => payload.token,
-  [logoutSuccess]: () => null,
+  // [logoutSuccess]: () => null,
 });
 
 const setError = (_, { payload }) => payload.message;
@@ -34,20 +34,20 @@ const error = createReducer(null, {
 });
 
 const isAuthenticated = createReducer(false, {
-  [registerSuccess]: () => false,
+  // [registerSuccess]: () => true,
   [loginSuccess]: () => true,
-  [getCurrentUserSuccess]: () => true,
-  [logoutSuccess]: () => false,
+  // [getCurrentUserSuccess]: () => true,
+  // [logoutSuccess]: () => false,
 });
 
 const isLoading = createReducer(false, {
-  [registerRequest]: () => true,
-  [registerSuccess]: () => false,
+  // [registerRequest]: () => true,
+  // [registerSuccess]: () => false,
   [loginRequest]: () => true,
   [loginSuccess]: () => false,
-  [logoutSuccess]: () => false,
-  [getCurrentUserRequest]: () => true,
-  [getCurrentUserSuccess]: () => false,
+  // [logoutSuccess]: () => false,
+  // [getCurrentUserRequest]: () => true,
+  // [getCurrentUserSuccess]: () => false,
   [getError]: () => false,
 });
 

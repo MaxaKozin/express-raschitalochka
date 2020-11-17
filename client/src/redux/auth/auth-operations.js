@@ -2,17 +2,17 @@ import axios from 'axios';
 // import { financeOperation } from '../finance';
 import {
   getError,
-  registerRequest,
-  registerSuccess,
+  // registerRequest,
+  // registerSuccess,
   loginRequest,
   loginSuccess,
-  logoutSuccess,
-  logoutRequest,
-  getCurrentUserRequest,
-  getCurrentUserSuccess,
+  // logoutSuccess,
+  // logoutRequest,
+  // getCurrentUserRequest,
+  // getCurrentUserSuccess,
 } from './auth-actions';
 
-axios.defaults.baseURL = 'https://raschitalochka.goit.co.ua/';
+axios.defaults.baseURL = 'http://localhost:5000/';
 
 export const token = {
   set(token) {
@@ -23,17 +23,17 @@ export const token = {
   },
 };
 
-const register = userData => async dispatch => {
-  dispatch(registerRequest());
+// const register = userData => async dispatch => {
+//   dispatch(registerRequest());
 
-  try {
-    await axios.post('api/register', userData);
-    dispatch(registerSuccess());
-    return true;
-  } catch (error) {
-    dispatch(getError(error.response.data));
-  }
-};
+//   try {
+//     await axios.post('api/register', userData);
+//     dispatch(registerSuccess());
+//     return true;
+//   } catch (error) {
+//     dispatch(getError(error.response.data));
+//   }
+// };
 
 const login = userData => async dispatch => {
   dispatch(loginRequest());
@@ -44,50 +44,50 @@ const login = userData => async dispatch => {
     dispatch(loginSuccess(res.data));
     // dispatch(financeOperation.getFinance());
   } catch (error) {
-    console.dir(error);
+    console.error(error);
     dispatch(getError(error.response.data));
   }
 };
 
-const logOut = () => async dispatch => {
-  dispatch(logoutRequest());
+// const logOut = () => async dispatch => {
+//   dispatch(logoutRequest());
 
-  try {
-    token.unset();
-    dispatch(logoutSuccess());
-  } catch (error) {
-    dispatch(getError(error));
-  }
-};
+//   try {
+//     token.unset();
+//     dispatch(logoutSuccess());
+//   } catch (error) {
+//     dispatch(getError(error));
+//   }
+// };
 
-const getCurrentUser = () => async (dispatch, getState) => {
-  const {
-    auth: {
-      token: persistedToken,
-      user: { id },
-    },
-  } = getState();
-  if (!persistedToken) {
-    return;
-  }
-  token.set(persistedToken);
-  try {
-    dispatch(getCurrentUserRequest());
-    const {
-      data: {
-        finance: { totalBalance: balance, data },
-      },
-    } = await axios.get(`api/finance/${id}`);
-    dispatch(getCurrentUserSuccess({ balance, data }));
-  } catch (error) {
-    dispatch(getError(error.response.data));
-  }
-};
+// const getCurrentUser = () => async (dispatch, getState) => {
+//   const {
+//     auth: {
+//       token: persistedToken,
+//       user: { id },
+//     },
+//   } = getState();
+//   if (!persistedToken) {
+//     return;
+//   }
+//   token.set(persistedToken);
+//   try {
+//     dispatch(getCurrentUserRequest());
+//     const {
+//       data: {
+//         finance: { totalBalance: balance, data },
+//       },
+//     } = await axios.get(`api/finance/${id}`);
+//     dispatch(getCurrentUserSuccess({ balance, data }));
+//   } catch (error) {
+//     dispatch(getError(error.response.data));
+//   }
+// };
 
 export default {
-  logOut,
-  getCurrentUser,
-  register,
+  // logOut,
+  // getCurrentUser,
+  // register,
   login,
   token,
 };
