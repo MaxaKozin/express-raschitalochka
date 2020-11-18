@@ -1,7 +1,7 @@
 import axios from 'axios';
 // import { financeOperation } from '../finance';
 import {
-  getError,
+  // getError,
   // registerRequest,
   // registerSuccess,
   loginRequest,
@@ -12,7 +12,7 @@ import {
   // getCurrentUserSuccess,
 } from './auth-actions';
 
-axios.defaults.baseURL = 'http://localhost:5000/';
+axios.defaults.baseURL = 'http://localhost:5000';
 
 export const token = {
   set(token) {
@@ -40,12 +40,12 @@ const login = userData => async dispatch => {
 
   try {
     const res = await axios.post('api/login', userData);
+    console.log(res);
     token.set(res.data.token);
-    dispatch(loginSuccess(res.data));
+    dispatch(loginSuccess(res.data.user));
     // dispatch(financeOperation.getFinance());
   } catch (error) {
     console.error(error);
-    dispatch(getError(error.response.data));
   }
 };
 

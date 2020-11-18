@@ -1,10 +1,25 @@
 import React from 'react';
 // import styles from './Login.module.css';
-import { NavLink } from 'react-router-dom'
 import styles from './LoginDesktop.module.css';
+import { NavLink } from 'react-router-dom'
 import phone from '../../assets/images/phone-mock-up.png';
 
-export default function LoginDesktop({ email, password, isValidEmail, onChangeEmailHandler, onChangePasswordHandler, onBlurEmailHandler, onSubmitHandler, isBtnNotDisabled }) {
+export default function LoginDesktop({ email,
+  onBlurEmailHandler, isValidEmail, password, onChangePasswordHandler, onChangeEmailHandler, onSubmitHandler, isBtnNotDisabled }) {
+
+
+  const onChangeEmail = e => {
+    onChangeEmailHandler(e.target.value)
+  }
+
+  const onChangePassword = e => {
+    onChangePasswordHandler(e.target.value)
+  }
+
+  const onSubmit = e => {
+    e.preventDefault()
+    onSubmitHandler()
+  }
   return (
     <div className={styles.main__container}>
       <div className={styles.desktopImage__container}>
@@ -21,7 +36,7 @@ export default function LoginDesktop({ email, password, isValidEmail, onChangeEm
           <span className={styles.projectName}>Raschitalochka 2.0</span>
           <form
             className={styles.loginForm}
-            onSubmit={onSubmitHandler}
+            onSubmit={onSubmit}
             autoComplete="off"
           >
             <label>
@@ -32,7 +47,7 @@ export default function LoginDesktop({ email, password, isValidEmail, onChangeEm
                 placeholder="E-mail as Login"
                 autoComplete="off"
                 value={email}
-                onChange={onChangeEmailHandler}
+                onChange={onChangeEmail}
                 onBlur={onBlurEmailHandler}
               />
             </label>
@@ -49,7 +64,7 @@ export default function LoginDesktop({ email, password, isValidEmail, onChangeEm
                 value={password}
                 autoComplete="off"
                 placeholder="Password"
-                onChange={onChangePasswordHandler}
+                onChange={onChangePassword}
               />
             </label>
             <button
