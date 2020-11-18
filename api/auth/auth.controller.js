@@ -7,7 +7,7 @@ const SALT_ROUNDS = process.env.SALT_ROUNDS || 10;
 const registrationController = async (req, res, next) => {
   try {
     const { body } = req;
-    const isUserExist = await User.findByEmail(body.email);
+    const isUserExist = await User.findUserByEmail({ email: body.email });
     if (isUserExist) {
       res.status(409).send({ 'message': 'user already exist' })
     }
@@ -22,7 +22,7 @@ const registrationController = async (req, res, next) => {
 
     const token = await tokenCreate(user._id);
 
-    await User.updateUser({ token });
+    await User.updateUser(user._id, { token });
 
     res.status(200).send(token)
   } catch (error) {
@@ -33,7 +33,7 @@ const registrationController = async (req, res, next) => {
 const loginController = async (req, res, next) => {
   try {
     const { body: { email, password } } = req;
-    const user = await User.findByEmail(email);
+    const user = await User.findUserByEmail({ email });
     if (!user) {
       res.status(401).send({ 'message': 'email or password wrong' })
     }
@@ -42,11 +42,11 @@ const loginController = async (req, res, next) => {
       res.status(401).send({ 'message': 'email or password wrong' })
     }
 
-    const token = await tokenCreate(user._id);
+    const token = await tokenCreate({ id: user._id });
 
-    await User.updateUser({ token });
+    await User.updateUser(user._id, { token });
 
-    res.status(200).send(token)
+    res.status(200).send({ user, token })
   } catch (error) {
     next(error)
   }
@@ -59,7 +59,7 @@ const logoutController = async (req, res, next) => {
     if (!user) {
       res.status(401).send({ "message": "Unauthorized" })
     }
-    await User.updateUser({ token: '' })
+    await User.updateUser(user._id, { token: '' })
     res.status(200).send({ "message": "user successfully log out" })
   } catch (error) {
     next(error)

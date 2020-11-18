@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { authOperations } from '../../redux/auth';
 import { emailValidate } from '../../services';
@@ -21,12 +21,12 @@ export default function Login() {
     setIsValidEmail('');
   };
 
-  const onChangeEmailHandler = e => {
-    setEmail(e.target.value);
+  const onChangeEmailHandler = (value) => {
+    setEmail(value);
   };
 
-  const onChangePasswordHandler = e => {
-    setPassword(e.target.value);
+  const onChangePasswordHandler = (value) => {
+    setPassword(value);
   };
 
   const onBlurEmailHandler = e => {
@@ -44,14 +44,12 @@ export default function Login() {
   //   if (error) dispatch(clearError());
   // }, [error, dispatch]);
 
-  const onSubmitHandler = useCallback(
-    event => {
-      event.preventDefault();
-      dispatch(authOperations.login({ email, password }));
-      resetForm();
-    },
-    [dispatch, email, password],
-  );
+  const onSubmitHandler = () => {
+    dispatch(authOperations.login({ email, password }));
+    resetForm();
+  }
+
+
 
   const isLoading = useSelector(state => state.auth.isLoading);
 
@@ -59,12 +57,13 @@ export default function Login() {
 
   const isMobile = false;
 
+  const params = { email, password, isValidEmail, onChangeEmailHandler, onChangePasswordHandler, onBlurEmailHandler, isBtnNotDisabled, onSubmitHandler }
   return (
     <>
-      {isLoading && (
+      {isLoading ? (
         <div style={{ position: 'absolute', top: 30, right: 30 }}> LOADING ...</div>
-      )}:{isMobile && (<LoginMobile props={email, password, isValidEmail, onChangeEmailHandler, onChangePasswordHandler, onBlurEmailHandler, onSubmitHandler, isBtnNotDisabled} />)}:{
-        <LoginDesktop props={email, password, isValidEmail, onChangeEmailHandler, onChangePasswordHandler, onBlurEmailHandler, onSubmitHandler, isBtnNotDisabled} />
-      }
-    </>)
+      ) : (isMobile ? (<LoginMobile {...params} />) :
+        (<LoginDesktop {...params} />))}
+    </>
+  )
 }
