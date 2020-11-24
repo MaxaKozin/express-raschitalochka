@@ -7,6 +7,7 @@ import Login from './views/Login';
 import Registration from './views/Registration'
 import { Switch } from 'react-router-dom';
 // import * as routes from './constants/routes';
+import './css/styles.css';
 
 function App() {
   return (

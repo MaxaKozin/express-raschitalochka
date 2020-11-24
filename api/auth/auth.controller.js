@@ -18,9 +18,8 @@ const registrationController = async (req, res, next) => {
       email: body.email,
       password: passwordHashed
     })
-    console.log(user);
 
-    const token = await tokenCreate(user._id);
+    const token = await tokenCreate({ id: user._id });
 
     await User.updateUser(user._id, { token });
 

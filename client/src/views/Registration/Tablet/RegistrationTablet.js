@@ -1,13 +1,13 @@
 import React, { useRef, useState, useCallback } from 'react';
-import { NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { authOperations } from '../../redux/auth';
-import emailValidate from '../../services/emailValidate';
+import { authOperations } from '../../../redux/auth';
+import { emailValidate } from '../../../services';
 import PasswordStrengthBar from 'react-password-strength-bar';
 
-import styles from './Registration.module.css';
+import styles from './RegistrationTablet.module.css';
 // import icon from '../../assets/icons/logo.svg';
-// import { clearError } from '../../redux/auth/auth-actions';
+
 
 export default function Registration() {
   const dispatch = useDispatch();
@@ -64,20 +64,6 @@ export default function Registration() {
     confirmPassword.current.value = '';
   };
 
-  // const error = useSelector(state => state.error);
-  // const token = useSelector(state => state.token);
-
-  // useEffect(() => {
-  //   Notification('error', error, 2000);
-  //   if (error) dispatch(clearError());
-  // }, [error, dispatch]);
-
-  // useEffect(() => {
-  //   if (token) {
-  //     Notification('success', 'Registration successful!', 2000);
-  //   }
-  // }, [token]);
-
   const onSubmitHandler = async e => {
     e.preventDefault();
     if (isValidEmail && isEqualPassword) {
@@ -102,6 +88,7 @@ export default function Registration() {
   const isBtnNotDisable =
     isValidEmail && isEqualPassword && name && isPasswordStrong;
 
+  const params = { email, password, isValidEmail, onChangeEmailHandler, onChangePasswordHandler, isBtnNotDisabled, onSubmitHandler, onBlurEmailHandler };
   return (
     <div className={styles.pageWrap}>
       {/* <Media device="desktop">

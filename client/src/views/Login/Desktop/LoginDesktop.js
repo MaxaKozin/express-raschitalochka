@@ -1,25 +1,33 @@
 import React from 'react';
-// import styles from './Login.module.css';
-import styles from './LoginDesktop.module.css';
-import { NavLink } from 'react-router-dom'
-import phone from '../../assets/images/phone-mock-up.png';
+import { NavLink } from 'react-router-dom';
+import { emailValidate } from '../../../services';
 
-export default function LoginDesktop({ email,
-  onBlurEmailHandler, isValidEmail, password, onChangePasswordHandler, onChangeEmailHandler, onSubmitHandler, isBtnNotDisabled }) {
+import styles from '../Login.module.css';
+import phone from '../../../assets/images/phone-mock-up.png';
 
+export default function LoginDesktop({ email, isValidEmail, password, onChangePasswordHandler, onChangeEmailHandler, onBlurEmailHandler, onSubmitHandler, isBtnNotDisabled }) {
 
   const onChangeEmail = e => {
     onChangeEmailHandler(e.target.value)
-  }
+  };
 
   const onChangePassword = e => {
     onChangePasswordHandler(e.target.value)
-  }
+  };
+
+  const onBlurEmail = e => {
+    if (emailValidate(email)) {
+      onBlurEmailHandler(true);
+    } else {
+      onBlurEmailHandler(false);
+    }
+  };
 
   const onSubmit = e => {
     e.preventDefault()
     onSubmitHandler()
-  }
+  };
+
   return (
     <div className={styles.main__container}>
       <div className={styles.desktopImage__container}>
@@ -48,7 +56,7 @@ export default function LoginDesktop({ email,
                 autoComplete="off"
                 value={email}
                 onChange={onChangeEmail}
-                onBlur={onBlurEmailHandler}
+                onBlur={onBlurEmail}
               />
             </label>
             {isValidEmail === false && (

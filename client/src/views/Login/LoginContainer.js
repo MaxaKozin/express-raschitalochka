@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { authOperations } from '../../redux/auth';
-import { emailValidate } from '../../services';
-import LoginDesktop from './LoginDesktop'
-import LoginMobile from './LoginMobile'
-// import Loader from 'react-loader-spinner';
-// import 'react-toastify/dist/ReactToastify.css';
-// import { clearError } from '../../redux/auth/auth-actions';
+import LoginDesktop from './Desktop';
+import LoginMobile from './Mobile';
+
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -29,27 +26,14 @@ export default function Login() {
     setPassword(value);
   };
 
-  const onBlurEmailHandler = e => {
-    if (emailValidate(email)) {
-      setIsValidEmail(true);
-    } else {
-      setIsValidEmail(false);
-    }
+  const onBlurEmailHandler = (bool) => {
+    setIsValidEmail(bool)
   };
-
-  // const error = useSelector(state => state.auth.error);
-
-  // useEffect(() => {
-  //   Notification('error', error, 2000);
-  //   if (error) dispatch(clearError());
-  // }, [error, dispatch]);
 
   const onSubmitHandler = () => {
     dispatch(authOperations.login({ email, password }));
     resetForm();
-  }
-
-
+  };
 
   const isLoading = useSelector(state => state.auth.isLoading);
 
@@ -57,11 +41,12 @@ export default function Login() {
 
   const isMobile = false;
 
-  const params = { email, password, isValidEmail, onChangeEmailHandler, onChangePasswordHandler, onBlurEmailHandler, isBtnNotDisabled, onSubmitHandler }
+  const params = { email, password, isValidEmail, onChangeEmailHandler, onChangePasswordHandler, isBtnNotDisabled, onSubmitHandler, onBlurEmailHandler };
+
   return (
     <>
       {isLoading ? (
-        <div style={{ position: 'absolute', top: 30, right: 30 }}> LOADING ...</div>
+        <div style={{ position: 'absolute', top: 30, right: 30 }}> LOADING ...</div> // should be changed to loader-spinner
       ) : (isMobile ? (<LoginMobile {...params} />) :
         (<LoginDesktop {...params} />))}
     </>

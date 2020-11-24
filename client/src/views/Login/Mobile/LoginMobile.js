@@ -1,23 +1,33 @@
 import React from 'react';
-import styles from './Login.module.css';
-import { NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom';
+import { emailValidate } from '../../../services';
+
+import styles from '../Login.module.css';
 
 export default function LoginMobile({ email,
   onBlurEmailHandler, isValidEmail, password, onChangePasswordHandler, onChangeEmailHandler, onSubmitHandler, isBtnNotDisabled }) {
 
-
   const onChangeEmail = e => {
     onChangeEmailHandler(e.target.value)
-  }
+  };
 
   const onChangePassword = e => {
     onChangePasswordHandler(e.target.value)
-  }
+  };
 
   const onSubmit = e => {
     e.preventDefault()
     onSubmitHandler()
-  }
+  };
+
+  const onBlurEmail = e => {
+    if (emailValidate(email)) {
+      onBlurEmailHandler(true);
+    } else {
+      onBlurEmailHandler(false);
+    }
+  };
+
   return (
     <div className={styles.loginBlock__container}>
       <div className={styles.loginBlock}>
@@ -37,7 +47,7 @@ export default function LoginMobile({ email,
               autoComplete="off"
               value={email}
               onChange={onChangeEmail}
-              onBlur={onBlurEmailHandler}
+              onBlur={onBlurEmail}
             />
           </label>
           {isValidEmail === false && (
