@@ -29,7 +29,7 @@ const serverInit = async () => {
   app.use(cors());
 
   app.use("/api", authRouter);
-  // app.use("/api/finance", financeRouter);
+  app.use("/api/finance", financeRouter);
 
   app.use((err, req, res, next) => {
     delete err.stack;

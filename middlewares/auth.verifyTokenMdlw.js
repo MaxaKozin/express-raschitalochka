@@ -1,23 +1,27 @@
-const { tokenVerify } = require('../services/jwt.service');
+const { tokenVerify } = require("../services/jwt.service");
+const User = require("../api/user/user.model");
 
 const verifyTokenMdlw = async (req, res, next) => {
   try {
-    const headerToken = req.get('Authorization')
+    const headerToken = req.get("Authorization");
     if (!headerToken) {
-      return res.status(401).send({ "message": "Not authorized" })
+      return res.status(401).send({ message: "Not authorized" });
     }
-    const result = await tokenVerify(headerToken);
-    console.log(result);
-    if (result === "Not authorized") {
+    const payload = await tokenVerify(headerToken);
+    const { id } = payload;
+    if (payload === "Not authorized") {
       res.status(401).send({
-        "message": "Not authorized"
-      })
+        message: "Not authorized",
+      });
     }
-    req.user = result;
+    const user = await User.findUserById(id);
+    req.user = user;
+    req.userId = id;
+
     next();
   } catch (error) {
-    next(error);;
+    next(error);
   }
-}
+};
 
 module.exports = { verifyTokenMdlw };
