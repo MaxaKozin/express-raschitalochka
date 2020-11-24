@@ -28,15 +28,32 @@ const userSchema = new mongoose.Schema(
     },
     finance: [
       {
-        comments: String,
-        dateEvent: Date,
-        typeEvent: {
+        comments: {
+          type: String,
+          required: true,
+          default: "",
+        },
+        date: {
+          type: Date,
+          required: true,
+        },
+        type: {
           type: String,
           enum: ["+", "-"],
         },
-        category: String,
-        amountEvent: String,
-        balanceAfter: String,
+        category: {
+          type: String,
+          required: true,
+        },
+        amount: {
+          type: String,
+          required: true,
+          default: "0",
+        },
+        balanceAfter: {
+          type: String,
+          default: "0",
+        },
       },
     ],
   },
