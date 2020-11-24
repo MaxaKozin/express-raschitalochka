@@ -2,8 +2,8 @@ import axios from 'axios';
 // import { financeOperation } from '../finance';
 import {
   // getError,
-  // registerRequest,
-  // registerSuccess,
+  registerRequest,
+  registerSuccess,
   loginRequest,
   loginSuccess,
   // logoutSuccess,
@@ -23,23 +23,24 @@ export const token = {
   },
 };
 
-// const register = userData => async dispatch => {
-//   dispatch(registerRequest());
+const register = userData => async dispatch => {
+  dispatch(registerRequest());
 
-//   try {
-//     await axios.post('api/register', userData);
-//     dispatch(registerSuccess());
-//     return true;
-//   } catch (error) {
-//     dispatch(getError(error.response.data));
-//   }
-// };
+  try {
+    const res = await axios.post('/api/register', userData);
+    console.log(res);
+    token.set(res.data.token)
+    dispatch(registerSuccess(res.data.user));
+  } catch (error) {
+    console.error(error);;
+  }
+};
 
 const login = userData => async dispatch => {
   dispatch(loginRequest());
 
   try {
-    const res = await axios.post('api/login', userData);
+    const res = await axios.post('/api/login', userData);
     console.log(res);
     token.set(res.data.token);
     dispatch(loginSuccess(res.data.user));
@@ -87,7 +88,7 @@ const login = userData => async dispatch => {
 export default {
   // logOut,
   // getCurrentUser,
-  // register,
+  register,
   login,
   token,
 };

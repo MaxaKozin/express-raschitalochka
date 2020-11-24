@@ -3,8 +3,8 @@ import { createReducer } from '@reduxjs/toolkit';
 import {
   getError,
   clearError,
-  // registerRequest,
-  // registerSuccess,
+  registerRequest,
+  registerSuccess,
   loginRequest,
   loginSuccess,
   // logoutSuccess,
@@ -15,13 +15,13 @@ import {
 const initialUserState = { name: null, email: null };
 
 const user = createReducer(initialUserState, {
-  // [registerSuccess]: (_, { payload }) => payload.user,
+  [registerSuccess]: (_, { payload }) => payload,
   [loginSuccess]: (_, { payload }) => payload,
   // [logoutSuccess]: () => initialUserState,
 });
 
 const token = createReducer(null, {
-  // [registerSuccess]: (_, { payload }) => payload.token,
+  [registerSuccess]: (_, { payload }) => payload,
   [loginSuccess]: (_, { payload }) => payload,
   // [logoutSuccess]: () => null,
 });
@@ -34,15 +34,15 @@ const error = createReducer(null, {
 });
 
 const isAuthenticated = createReducer(false, {
-  // [registerSuccess]: () => true,
+  [registerSuccess]: () => true,
   [loginSuccess]: () => true,
   // [getCurrentUserSuccess]: () => true,
   // [logoutSuccess]: () => false,
 });
 
 const isLoading = createReducer(false, {
-  // [registerRequest]: () => true,
-  // [registerSuccess]: () => false,
+  [registerRequest]: () => true,
+  [registerSuccess]: () => false,
   [loginRequest]: () => true,
   [loginSuccess]: () => false,
   // [logoutSuccess]: () => false,
