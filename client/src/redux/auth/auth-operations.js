@@ -6,8 +6,8 @@ import {
   registerSuccess,
   loginRequest,
   loginSuccess,
-  // logoutSuccess,
-  // logoutRequest,
+  logoutSuccess,
+  logoutRequest,
   // getCurrentUserRequest,
   // getCurrentUserSuccess,
 } from './auth-actions';
@@ -50,16 +50,16 @@ const login = userData => async dispatch => {
   }
 };
 
-// const logOut = () => async dispatch => {
-//   dispatch(logoutRequest());
+const logOut = () => async dispatch => {
+  dispatch(logoutRequest());
 
-//   try {
-//     token.unset();
-//     dispatch(logoutSuccess());
-//   } catch (error) {
-//     dispatch(getError(error));
-//   }
-// };
+  try {
+    token.unset();
+    dispatch(logoutSuccess());
+  } catch (error) {
+    console.error(error);;
+  }
+};
 
 // const getCurrentUser = () => async (dispatch, getState) => {
 //   const {
@@ -86,7 +86,7 @@ const login = userData => async dispatch => {
 // };
 
 export default {
-  // logOut,
+  logOut,
   // getCurrentUser,
   register,
   login,
