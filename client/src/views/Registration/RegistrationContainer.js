@@ -62,7 +62,9 @@ export default function Registration() {
 
   const isLoading = useSelector(state => state.auth.isLoading);
 
-  const isMobile = false;
+  const isMobile = useSelector(state => state.isMobile);
+  const isTablet = useSelector(state => state.isTablet);
+  const isDesktop = !isMobile && !isTablet
 
   const params = { name, email, password, isValidEmail, isEqualPassword, isPasswordStrong, onChangeNameHandler, onChangeEmailHandler, onChangePasswordHandler, onChangeConfrimPassHandler, checkStrenthPassHandler, isBtnNotDisable, onSubmitHandler, onBlurEmailHandler };
 

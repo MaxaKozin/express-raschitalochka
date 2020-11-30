@@ -60,7 +60,7 @@ export default function RegistrationDesktop({ name, email, password, isValidEmai
           <svg className={styles.icon}>
             <use href={`${icon}#logo`}></use>
           </svg>
-          <span className={styles.projectName}>Raschitalochka</span>
+          <span className={styles.projectName}>Raschitalochka 2.0</span>
         </div>
         <h2 className={styles.losung}>
           <span>Create your own</span>

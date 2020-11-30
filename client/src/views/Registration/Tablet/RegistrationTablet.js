@@ -91,31 +91,10 @@ export default function Registration() {
   const params = { email, password, isValidEmail, onChangeEmailHandler, onChangePasswordHandler, isBtnNotDisabled, onSubmitHandler, onBlurEmailHandler };
   return (
     <div className={styles.pageWrap}>
-      {/* <Media device="desktop">
-        <div className={styles.leftSide}>
-          <div className={styles.appNameContainer}>
-            <svg className={styles.icon}>
-              <use href={`${icon}#logo`}></use>
-            </svg>
-            <span className={styles.projectName}>Raschitalochka</span>
-          </div>
-          <h2 className={styles.losung}>
-            <span>Create your own</span>
-            <span>categories of costs</span>
-          </h2>
-        </div>
-      </Media> */}
       <div className={styles.registerWrap}>
         <div className={styles.registerBlock}>
           <div className={styles.container}>
-            {/* <Media device="mobile">
-              <div className={styles.logo}></div>
-              <span className={styles.projectName}>Raschitalochka</span>
-            </Media> */}
-
-            {/* <Media device="fromTablet">
-              <h2 className={styles.title}>Registration</h2>
-            </Media> */}
+            <h2 className={styles.title}>Registration</h2>
             <form
               className={styles.registerForm}
               onSubmit={onSubmitHandler}
