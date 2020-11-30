@@ -1,5 +1,5 @@
-import storage from 'redux-persist/lib/storage';
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+import storage from "redux-persist/lib/storage";
+import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import {
   persistStore,
   persistReducer,
@@ -9,8 +9,12 @@ import {
   PERSIST,
   PURGE,
   REGISTER,
-} from 'redux-persist';
-import authReducer from './auth/auth-reducers';
+} from "redux-persist";
+import authReducer from "./auth/auth-reducers";
+import {
+  isMobileReducer,
+  isTabletReducer,
+} from "./resolution/resolution-reducers";
 // import { financeReducer } from './finance';
 // import { bankDataReducer } from './bankData';
 
@@ -23,19 +27,21 @@ const middleware = [
 ];
 
 const persistStoreConfig = {
-  key: 'bearer',
+  key: "bearer",
   storage,
-  blacklist: ['isAuthenticated', 'error', 'isLoading'],
+  blacklist: ["isAuthenticated", "error", "isLoading"],
 };
 
 const store = configureStore({
   reducer: {
     auth: persistReducer(persistStoreConfig, authReducer),
+    isMobile: isMobileReducer,
+    isTablet: isTabletReducer,
     // finance: financeReducer,
     // bankData: bankDataReducer,
   },
   middleware,
-  devTools: process.env.NODE_ENV === 'development',
+  devTools: process.env.NODE_ENV === "development",
 });
 
 const persistor = persistStore(store);
