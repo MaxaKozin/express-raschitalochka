@@ -1,1 +1,1 @@
-export { default } from './RegistartionTablet';
+export { default } from './RegistrationTablet';

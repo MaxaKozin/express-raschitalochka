@@ -1,6 +1,5 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import * as routes from '../../constants/routes';
 import { financeOperation } from '../../redux/finance';
 import AddTransaction from '../AddTransaction';
 import styles from './AddTransactionMobile.module.css';
@@ -18,7 +17,7 @@ export default function AddTransactionMobile({ props, radioButtonData, type }) {
       return props.history.push(state.from);
     }
 
-    props.history.push(routes.HOME);
+    props.history.push("/");
   };
   return (
     <div className={styles.mobile_wrapper}>

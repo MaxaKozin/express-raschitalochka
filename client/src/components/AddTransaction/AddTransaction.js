@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { RadioButton } from '../../common';
+import RadioBtn from '../RadioButton';
 
 import styles from './AddTransaction.module.css';
 
@@ -44,7 +44,7 @@ export default function AddTransaction({ onSubmit, onCloseModal, radioButtonData
       <div className={styles.categories_wrapper}>
         <h2 className={styles.categories_title}>Categories</h2>
         {radioButtonData.map(value => (
-          <RadioButton
+          <RadioBtn
             value={value}
             key={value}
             onChange={({ target: { value } }) => setCategory(value)}

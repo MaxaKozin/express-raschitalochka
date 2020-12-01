@@ -53,89 +53,85 @@ export default function RegistrationMobile({ name, email, password, isValidEmail
   };
 
   return (
-    <div className={styles.pageWrap}>
-      <div className={styles.registerWrap}>
-        <div className={styles.registerBlock}>
-          <div className={styles.container}>
-            <div className={styles.logo}></div>
-            <span className={styles.projectName}>Raschitalochka 2.0</span>
-            <form
-              className={styles.registerForm}
-              onSubmit={onSubmit}
+    <div className={styles.registerBlock}>
+      <div className={styles.container}>
+        <div className={styles.logo}></div>
+        <span className={styles.projectName}>Raschitalochka 2.0</span>
+        <form
+          className={styles.registerForm}
+          onSubmit={onSubmit}
+          autoComplete="off"
+        >
+          <label>
+            <input
+              className={styles.input + ' ' + styles.emailInput}
+              type="email"
+              name="email"
+              value={email}
               autoComplete="off"
-            >
-              <label>
-                <input
-                  className={styles.input + ' ' + styles.emailInput}
-                  type="email"
-                  name="email"
-                  value={email}
-                  autoComplete="off"
-                  placeholder="E-mail as Login"
-                  onChange={onChangeEmail}
-                  onBlur={onBlurEmail}
-                />
-              </label>
-              {isValidEmail === false && (
-                <div className={styles.warningText}>
-                  <span>Please enter valid email address!</span>
-                </div>
-              )}
-              <label>
-                <input
-                  className={styles.input + ' ' + styles.passwordInput}
-                  type="password"
-                  name="password"
-                  value={password}
-                  placeholder="Password"
-                  onChange={onChangePassword}
-                  onBlur={onChangeConfrimPass}
-                />
-              </label>
-              <label>
-                <input
-                  className={styles.input + ' ' + styles.passwordInput}
-                  type="password"
-                  name="password confirmation"
-                  placeholder="Password Confirmation"
-                  onChange={onChangeConfrimPass}
-                  onBlur={onChangeConfrimPass}
-                  ref={confirmPassword}
-                />
-              </label>
-              {isEqualPassword === false && (
-                <div className={styles.warningText}>
-                  <span>Password doesn't match!</span>
-                </div>
-              )}
-              <PasswordStrengthBar
-                password={password}
-                minLength="5"
-                onChangeScore={score => checkStrenthPass(score)}
-              />
-              <label>
-                <input
-                  className={styles.input + ' ' + styles.nameInput}
-                  type="name"
-                  name="name"
-                  value={name}
-                  placeholder="Your Name"
-                  onChange={onChangeName}
-                />
-              </label>
-              <button
-                className={styles.btnRegister}
-                type="submit"
-                disabled={!isBtnNotDisable}
-              >
-                Register
+              placeholder="E-mail as Login"
+              onChange={onChangeEmail}
+              onBlur={onBlurEmail}
+            />
+          </label>
+          {isValidEmail === false && (
+            <div className={styles.warningText}>
+              <span>Please enter valid email address!</span>
+            </div>
+          )}
+          <label>
+            <input
+              className={styles.input + ' ' + styles.passwordInput}
+              type="password"
+              name="password"
+              value={password}
+              placeholder="Password"
+              onChange={onChangePassword}
+              onBlur={onChangeConfrimPass}
+            />
+          </label>
+          <label>
+            <input
+              className={styles.input + ' ' + styles.passwordInput}
+              type="password"
+              name="password confirmation"
+              placeholder="Password Confirmation"
+              onChange={onChangeConfrimPass}
+              onBlur={onChangeConfrimPass}
+              ref={confirmPassword}
+            />
+          </label>
+          {isEqualPassword === false && (
+            <div className={styles.warningText}>
+              <span>Password doesn't match!</span>
+            </div>
+          )}
+          <PasswordStrengthBar
+            password={password}
+            minLength="5"
+            onChangeScore={score => checkStrenthPass(score)}
+          />
+          <label>
+            <input
+              className={styles.input + ' ' + styles.nameInput}
+              type="name"
+              name="name"
+              value={name}
+              placeholder="Your Name"
+              onChange={onChangeName}
+            />
+          </label>
+          <button
+            className={styles.btnRegister}
+            type="submit"
+            disabled={!isBtnNotDisable}
+          >
+            Register
               </button>
-            </form>
-            <NavLink className={styles.loginLink} exact to={'/login'}>
-              Login
+        </form>
+        <NavLink className={styles.loginLink} exact to={'/login'}>
+          Login
             </NavLink>
-          </div>
-        </div>
       </div>
     </div>
   );

@@ -3,13 +3,10 @@ import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import Modal from '../Modal/Modal';
 import styles from './ModalBtn.module.css';
-import * as routes from '../../constants/routes';
-import { Media } from '../../common';
 import AddTransaction from '../AddTransaction';
-import { costs, income } from '../../constants/CategoryValues';
+import { costs, income } from './categoryValues';
 import { financeOperation } from '../../redux/finance';
-import * as transactionTypes from '../../constants/transactionTypes';
-
+import { transactionTypes } from '../../common';
 export default function ModalBtn() {
   const [componentInModal, setComponentInModal] = useState('');
   const dispatch = useDispatch();
@@ -28,29 +25,29 @@ export default function ModalBtn() {
   return (
     <>
       <div className={styles.modalBtnBox}>
-        <Media device="mobile">
-          <NavLink className={styles.modalBtn} exact to={routes.ADDINCOME}>
-            Add Income
+        {/* <Media device="mobile"> */}
+        <NavLink className={styles.modalBtn} exact to={"/addincome"}>
+          Add Income
           </NavLink>
-          <NavLink className={styles.modalBtn} exact to={routes.ADDCOST}>
-            Add Cost
+        <NavLink className={styles.modalBtn} exact to={"/addcost"}>
+          Add Cost
           </NavLink>
-        </Media>
+        {/* </Media> */}
 
-        <Media device="fromTablet">
-          <button
-            className={styles.modalBtn}
-            onClick={() => setModalContent(transactionTypes.addIncome)}
-          >
-            {transactionTypes.addIncome}
-          </button>
-          <button
-            className={styles.modalBtn}
-            onClick={() => setModalContent(transactionTypes.addCost)}
-          >
-            {transactionTypes.addCost}
-          </button>
-        </Media>
+        {/* <Media device="fromTablet"> */}
+        <button
+          className={styles.modalBtn}
+          onClick={() => setModalContent(transactionTypes.addIncome)}
+        >
+          {transactionTypes.addIncome}
+        </button>
+        <button
+          className={styles.modalBtn}
+          onClick={() => setModalContent(transactionTypes.addCost)}
+        >
+          {transactionTypes.addCost}
+        </button>
+        {/* </Media> */}
       </div>
 
       {componentInModal && (

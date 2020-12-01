@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { authOperations } from "../../redux/auth";
 import LoginDesktop from "./Desktop";
 import LoginMobile from "./Mobile";
+import LoginTablet from "./Tablet";
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -38,8 +39,6 @@ export default function Login() {
 
   const isBtnNotDisabled = isValidEmail && password.length > 4;
 
-  const isMobile = useSelector((state) => state.isMobile);
-
   const params = {
     email,
     password,
@@ -51,6 +50,22 @@ export default function Login() {
     onBlurEmailHandler,
   };
 
+  const isMobile = useSelector(state => state.isMobile);
+  const isTablet = useSelector(state => state.isTablet);
+  const isDesktop = !isMobile && !isTablet
+
+  const defineDevice = () => {
+    if (isMobile) {
+      return <LoginMobile {...params} />;
+    }
+    if (isDesktop) {
+      return <LoginDesktop {...params} />
+    }
+    if (isTablet) {
+      return <LoginTablet {...params} />
+    }
+  };
+
   return (
     <>
       {isLoading ? (
@@ -58,11 +73,8 @@ export default function Login() {
           {" "}
           LOADING ...
         </div> // should be changed to loader-spinner
-      ) : isMobile ? (
-        <LoginMobile {...params} />
-      ) : (
-        <LoginDesktop {...params} />
-      )}
+      ) : (defineDevice())
+      }
     </>
   );
 }

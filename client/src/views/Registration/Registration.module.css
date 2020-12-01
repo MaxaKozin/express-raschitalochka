@@ -1,8 +1,10 @@
 .registerBlock {
   padding-top: 62px;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
+  text-align: center;
+  height: 100vh;
 }
 
 .container {
@@ -23,7 +25,8 @@
 }
 
 .projectName {
-  font-family: var(--main-ff);
+  font-family: var(--bold-ff);
+  font-size: 16px;
   color: #2c353e;
   margin-bottom: 34px;
 }
@@ -72,7 +75,7 @@
 }
 
 .btnRegister {
-  font-family: var(--main-ff);
+  font-family: var(--bold-ff);
   font-size: 15px;
   height: 48px;
   width: 100%;
@@ -111,11 +114,12 @@
     height: 100vh;
     background-image: url(../../assets/images/bg-pic-for-login--min.jpg);
     background-position: right bottom;
-    background-size: 200%;
+    background-size: cover;
   }
 
   .registerBlock {
     width: 550px;
+    height: 550px;
     background-color: #fff;
     border-radius: 5px;
     filter: drop-shadow(10px 17.321px 20px rgba(107, 125, 131, 0.3));
@@ -150,7 +154,7 @@
   }
 }
 
-@media screen and (min-width: 1280px) {
+@media screen and (min-width: 1024px) {
   .pageWrap {
     display: flex;
     justify-content: space-between;

@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { financeOperation } from '../../redux/finance';
-import { ToastContainer } from 'react-toastify';
-import { Media } from '../../common';
+// import { ToastContainer } from 'react-toastify';
 import {
   CurrencyExchange,
   ModalBtn,
@@ -25,18 +24,23 @@ export default function HomeView() {
   return (
     <>
       <div className="main_container main_container__table">
-        <Media children={<TotalBalance />} device="mobile" />
+        <h1>HOME PAGE</h1>
+        {/* <Media children={ */}
+        {/* <TotalBalance /> */}
+        {/* } device="mobile" /> */}
 
-        <ModalBtn />
-        <Media device="mobile">
-          <TransferMobile />
-        </Media>
-        <Media device="fromTablet">
-          <TransferPcTablet />
-        </Media>
+        {/* <ModalBtn /> */}
+        {/* <Media device="mobile"> */}
+        {/* <TransferMobile /> */}
+        {/* </Media> */}
+        {/* <Media device="fromTablet"> */}
+        {/* <TransferPcTablet /> */}
+        {/* </Media> */}
       </div>
-      <Media children={<CurrencyExchange />} device="onlyTablet" />
-      <ToastContainer />
+      {/* <Media children={ */}
+      {/* <CurrencyExchange /> */}
+      {/* } device="onlyTablet" /> */}
+      {/* <ToastContainer /> */}
     </>
   );
 }

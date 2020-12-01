@@ -1,9 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import SvgIcons from './SvgIcons';
-import * as routes from '../../constants/routes';
 import styles from './NavBar.module.css';
-import { Media } from '../../common';
 
 export default function NavBar({ children }) {
   return (
@@ -12,7 +10,7 @@ export default function NavBar({ children }) {
         <div className={styles.container}>
           <NavLink
             exact
-            to={routes.HOME}
+            to={"/"}
             className={styles.navLink}
             activeClassName={styles.navLink__active}
           >
@@ -23,7 +21,7 @@ export default function NavBar({ children }) {
 
           <NavLink
             exact
-            to={routes.STATISTICS}
+            to={"/statistics"}
             className={styles.navLink}
             activeClassName={styles.navLink__active}
           >
@@ -32,18 +30,18 @@ export default function NavBar({ children }) {
             <span className={styles.navLink_text}>Diagram</span>
           </NavLink>
 
-          <Media device="mobile">
-            <NavLink
-              exact
-              to={routes.CURRENCY}
-              className={styles.navLink}
-              activeClassName={styles.navLink__active}
-            >
-              <SvgIcons id="icon-currency" />
-            </NavLink>
-          </Media>
+          {/* <Media device="mobile"> */}
+          <NavLink
+            exact
+            to={"/currency"}
+            className={styles.navLink}
+            activeClassName={styles.navLink__active}
+          >
+            <SvgIcons id="icon-currency" />
+          </NavLink>
+          {/* </Media> */}
 
-          <Media device="onlyTablet">{children}</Media>
+          {/* <Media device="onlyTablet">{children}</Media> */}
         </div>
       </div>
     </>
