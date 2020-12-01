@@ -2,8 +2,13 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import SvgIcons from './SvgIcons';
 import styles from './NavBar.module.css';
+import { useSelector } from "react-redux";
+
 
 export default function NavBar({ children }) {
+  const isMobile = useSelector((state) => state.isMobile);
+  const isTablet = useSelector((state) => state.isTablet);
+
   return (
     <>
       <div className={styles.wrap}>
@@ -29,21 +34,19 @@ export default function NavBar({ children }) {
 
             <span className={styles.navLink_text}>Diagram</span>
           </NavLink>
-
-          {/* <Media device="mobile"> */}
-          <NavLink
-            exact
-            to={"/currency"}
-            className={styles.navLink}
-            activeClassName={styles.navLink__active}
-          >
-            <SvgIcons id="icon-currency" />
-          </NavLink>
-          {/* </Media> */}
-
-          {/* <Media device="onlyTablet">{children}</Media> */}
+          {isMobile && (
+            <NavLink
+              exact
+              to={"/currency"}
+              className={styles.navLink}
+              activeClassName={styles.navLink__active}
+            >
+              <SvgIcons id="icon-currency" />
+            </NavLink>
+          )}
+          {isTablet && <>{children}</>}
         </div>
       </div>
     </>
   );
-};
+}
