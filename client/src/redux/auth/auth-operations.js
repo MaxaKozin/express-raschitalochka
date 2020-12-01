@@ -1,5 +1,5 @@
 import axios from 'axios';
-// import { financeOperation } from '../finance';
+import { financeOperation } from '../finance';
 import {
   // getError,
   registerRequest,
@@ -8,8 +8,8 @@ import {
   loginSuccess,
   logoutSuccess,
   logoutRequest,
-  // getCurrentUserRequest,
-  // getCurrentUserSuccess,
+  getCurrentUserRequest,
+  getCurrentUserSuccess,
 } from './auth-actions';
 
 axios.defaults.baseURL = 'http://localhost:5000';
@@ -44,7 +44,7 @@ const login = userData => async dispatch => {
     console.log(res);
     token.set(res.data.token);
     dispatch(loginSuccess(res.data.user));
-    // dispatch(financeOperation.getFinance());
+    dispatch(financeOperation.getFinance());
   } catch (error) {
     console.error(error);
   }
@@ -61,33 +61,33 @@ const logOut = () => async dispatch => {
   }
 };
 
-// const getCurrentUser = () => async (dispatch, getState) => {
-//   const {
-//     auth: {
-//       token: persistedToken,
-//       user: { id },
-//     },
-//   } = getState();
-//   if (!persistedToken) {
-//     return;
-//   }
-//   token.set(persistedToken);
-//   try {
-//     dispatch(getCurrentUserRequest());
-//     const {
-//       data: {
-//         finance: { totalBalance: balance, data },
-//       },
-//     } = await axios.get(`api/finance/${id}`);
-//     dispatch(getCurrentUserSuccess({ balance, data }));
-//   } catch (error) {
-//     dispatch(getError(error.response.data));
-//   }
-// };
+const getCurrentUser = () => async (dispatch, getState) => {
+  const {
+    auth: {
+      token: persistedToken,
+      user: { id },
+    },
+  } = getState();
+  if (!persistedToken) {
+    return;
+  }
+  token.set(persistedToken);
+  try {
+    dispatch(getCurrentUserRequest());
+    const {
+      data: {
+        finance: { totalBalance: balance, data },
+      },
+    } = await axios.get(`api/finance/${id}`);
+    dispatch(getCurrentUserSuccess({ balance, data }));
+  } catch (error) {
+    console.error(error);;
+  }
+};
 
 export default {
   logOut,
-  // getCurrentUser,
+  getCurrentUser,
   register,
   login,
   token,

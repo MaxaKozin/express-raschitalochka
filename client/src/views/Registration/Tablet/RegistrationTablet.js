@@ -1,124 +1,65 @@
-import React, { useRef, useState, useCallback } from 'react';
+import React, { useRef } from 'react';
 import { NavLink } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { authOperations } from '../../../redux/auth';
 import { emailValidate } from '../../../services';
 import PasswordStrengthBar from 'react-password-strength-bar';
 
-import styles from './RegistrationTablet.module.css';
-// import icon from '../../assets/icons/logo.svg';
+import styles from '../Registration.module.css';
 
 
-export default function Registration() {
-  const dispatch = useDispatch();
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  const [isValidEmail, setIsValidEmail] = useState('');
-  const [isEqualPassword, setIsEqualPassword] = useState('');
-  const [isPasswordStrong, setIsPasswordStrong] = useState(false);
+export default function RegistrationTablet({ name, email, password, isValidEmail, isEqualPassword, onChangeNameHandler, onChangeEmailHandler, onChangePasswordHandler, onBlurEmailHandler, onChangeConfrimPassHandler, checkStrenthPassHandler, onSubmitHandler, isBtnNotDisable }) {
+  ;
   const confirmPassword = useRef('');
 
-  const onChangeHandler = useCallback(({ currentTarget: { name, value } }) => {
-    switch (name) {
-      case 'name':
-        setName(value);
-        break;
-      case 'email':
-        setEmail(value);
-        break;
-      case 'password':
-        setPassword(value);
-        break;
+  const onChangeName = (e) => {
+    onChangeNameHandler(e.target.value)
+  };
 
-      default:
-        console.log(new Error());
-        break;
-    }
-  }, []);
+  const onChangeEmail = (e) => {
+    onChangeEmailHandler(e.target.value)
+  }
+  const onChangePassword = (e) => {
+    onChangePasswordHandler(e.target.value)
+  }
 
-  const onBlurEmailHandler = e => {
+  const onBlurEmail = e => {
     if (emailValidate(email)) {
-      setIsValidEmail(true);
+      onBlurEmailHandler(true);
     } else {
-      setIsValidEmail(false);
+      onBlurEmailHandler(false);
     }
   };
 
-  const onChangeConfrimPassHandler = e => {
+  const onChangeConfrimPass = e => {
     if (confirmPassword.current.value === password) {
-      setIsEqualPassword(true);
+      onChangeConfrimPassHandler(true);
     } else {
-      setIsEqualPassword(false);
+      onChangeConfrimPassHandler(false);
     }
   };
 
-  const resetInput = () => {
-    setName('');
-    setEmail('');
-    setPassword('');
-    setIsValidEmail('');
-    setIsEqualPassword('');
-    setIsPasswordStrong(false);
+  const onSubmit = e => {
+    e.preventDefault();
+    onSubmitHandler();
     confirmPassword.current.value = '';
   };
 
-  const onSubmitHandler = async e => {
-    e.preventDefault();
-    if (isValidEmail && isEqualPassword) {
-      const response = await dispatch(
-        authOperations.register({ name, email, password }),
-      );
-      resetInput();
-      if (response) {
-        dispatch(authOperations.login({ email, password }));
-      }
-    }
-  };
-
-  const CheckStrenthPass = score => {
+  const checkStrenthPass = (score) => {
     if (score > 0) {
-      setIsPasswordStrong(true);
+      checkStrenthPassHandler(true);
     } else {
-      setIsPasswordStrong(false);
+      checkStrenthPassHandler(false);
     }
   };
 
-  const isBtnNotDisable =
-    isValidEmail && isEqualPassword && name && isPasswordStrong;
-
-  const params = { email, password, isValidEmail, onChangeEmailHandler, onChangePasswordHandler, isBtnNotDisabled, onSubmitHandler, onBlurEmailHandler };
   return (
     <div className={styles.pageWrap}>
-      {/* <Media device="desktop">
-        <div className={styles.leftSide}>
-          <div className={styles.appNameContainer}>
-            <svg className={styles.icon}>
-              <use href={`${icon}#logo`}></use>
-            </svg>
-            <span className={styles.projectName}>Raschitalochka</span>
-          </div>
-          <h2 className={styles.losung}>
-            <span>Create your own</span>
-            <span>categories of costs</span>
-          </h2>
-        </div>
-      </Media> */}
       <div className={styles.registerWrap}>
         <div className={styles.registerBlock}>
           <div className={styles.container}>
-            {/* <Media device="mobile">
-              <div className={styles.logo}></div>
-              <span className={styles.projectName}>Raschitalochka</span>
-            </Media> */}
-
-            {/* <Media device="fromTablet">
-              <h2 className={styles.title}>Registration</h2>
-            </Media> */}
+            <h2 className={styles.title}>Registration</h2>
             <form
               className={styles.registerForm}
-              onSubmit={onSubmitHandler}
+              onSubmit={onSubmit}
               autoComplete="off"
             >
               <label>
@@ -129,8 +70,8 @@ export default function Registration() {
                   value={email}
                   autoComplete="off"
                   placeholder="E-mail as Login"
-                  onChange={onChangeHandler}
-                  onBlur={onBlurEmailHandler}
+                  onChange={onChangeEmail}
+                  onBlur={onBlurEmail}
                 />
               </label>
               {isValidEmail === false && (
@@ -145,8 +86,8 @@ export default function Registration() {
                   name="password"
                   value={password}
                   placeholder="Password"
-                  onChange={onChangeHandler}
-                  onBlur={onChangeConfrimPassHandler}
+                  onChange={onChangePassword}
+                  onBlur={onChangeConfrimPass}
                 />
               </label>
               <label>
@@ -155,8 +96,8 @@ export default function Registration() {
                   type="password"
                   name="password confirmation"
                   placeholder="Password Confirmation"
-                  onChange={onChangeConfrimPassHandler}
-                  onBlur={onChangeConfrimPassHandler}
+                  onChange={onChangeConfrimPass}
+                  onBlur={onChangeConfrimPass}
                   ref={confirmPassword}
                 />
               </label>
@@ -168,7 +109,7 @@ export default function Registration() {
               <PasswordStrengthBar
                 password={password}
                 minLength="5"
-                onChangeScore={score => CheckStrenthPass(score)}
+                onChangeScore={score => checkStrenthPass(score)}
               />
               <label>
                 <input
@@ -177,7 +118,7 @@ export default function Registration() {
                   name="name"
                   value={name}
                   placeholder="Your Name"
-                  onChange={onChangeHandler}
+                  onChange={onChangeName}
                 />
               </label>
               <button

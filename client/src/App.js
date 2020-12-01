@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Switch } from "react-router-dom";
 import {
-  // PrivateRoute,
+  PrivateRoute,
   PublicRoute,
 } from "./common";
 import Login from "./views/Login";
 import Registration from "./views/Registration";
+import Home from "./views/Home";
 import {
   setIsDesktop,
   setIsMobile,
@@ -53,6 +54,12 @@ function App() {
           exact
           redirectTo={"/"}
           component={Registration}
+        />
+        <PrivateRoute
+          path={"/"}
+          exact
+          redirectTo={"login"}
+          component={Home}
         />
       </Switch>
     </div>

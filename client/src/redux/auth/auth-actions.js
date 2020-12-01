@@ -12,5 +12,5 @@ export const loginSuccess = createAction("auth/loginSuccess");
 export const logoutRequest = createAction("auth/logoutRequest");
 export const logoutSuccess = createAction("auth/logoutSuccess");
 
-// export const getCurrentUserRequest = createAction('auth/getCurrentUserRequest');
-// export const getCurrentUserSuccess = createAction('auth/getCurrentUserSuccess');
+export const getCurrentUserRequest = createAction('auth/getCurrentUserRequest');
+export const getCurrentUserSuccess = createAction('auth/getCurrentUserSuccess');

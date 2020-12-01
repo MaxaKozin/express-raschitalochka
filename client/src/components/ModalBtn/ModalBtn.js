@@ -1,14 +1,12 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
-import Modal from "../Modal/Modal";
-import * as routes from "../../constants/routes";
-import { Media } from "../../common";
-import AddTransaction from "../AddTransaction";
-import { costs, income } from "../../constants/CategoryValues";
-import { financeOperation } from "../../redux/finance";
-import * as transactionTypes from "../../constants/transactionTypes";
-import styles from "./ModalBtn.module.css";
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom';
+import Modal from '../Modal/Modal';
+import styles from './ModalBtn.module.css';
+import AddTransaction from '../AddTransaction';
+import { costs, income } from './categoryValues';
+import { financeOperation } from '../../redux/finance';
+import { transactionTypes } from '../../common';
 
 export default function ModalBtn() {
   const [componentInModal, setComponentInModal] = useState("");
@@ -32,10 +30,10 @@ export default function ModalBtn() {
       <div className={styles.modalBtnBox}>
         {isMobile && (
           <>
-            <NavLink className={styles.modalBtn} exact to={routes.ADDINCOME}>
+            <NavLink className={styles.modalBtn} exact to={"/addincome"}>
               Add Income
             </NavLink>
-            <NavLink className={styles.modalBtn} exact to={routes.ADDCOST}>
+            <NavLink className={styles.modalBtn} exact to={"/addcost"}>
               Add Cost
             </NavLink>
           </>

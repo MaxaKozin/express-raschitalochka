@@ -6,7 +6,7 @@ import {
   getFinanceRequest,
   getError,
 } from './finance-action';
-import * as transactionTypes from '../../constants/transactionTypes';
+import { transactionTypes } from '../../common';
 
 const getFinance = () => async (dispatch, getState) => {
   try {

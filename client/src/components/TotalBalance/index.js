@@ -1,1 +1,1 @@
-export { default } from './TotalBalance.container';
+export { default } from './TotalBalance';
