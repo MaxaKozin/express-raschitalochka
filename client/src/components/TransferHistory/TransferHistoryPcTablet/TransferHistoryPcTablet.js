@@ -4,7 +4,7 @@ import styles from './TransferHistoryPcTablet.module.css';
 const { tableShadow, table, tableRow, tableTopRow, th, td } = styles;
 
 export default function TransferHistoryPcTablet() {
-  const dataBase = useSelector(state => state.finance.transactionHistory);
+  const transactionHistory = useSelector(state => state.finance.transactionHistory);
 
   return (
     <section className={tableShadow}>
@@ -20,7 +20,7 @@ export default function TransferHistoryPcTablet() {
           </tr>
         </thead>
         <tbody>
-          {dataBase.map(
+          {transactionHistory.map(
             (
               { date, type, category, comments, amount, balanceAfter },
               index,

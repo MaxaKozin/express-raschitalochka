@@ -44,7 +44,6 @@ const loginController = async (req, res, next) => {
     const token = await tokenCreate({ id: user._id });
 
     await User.updateUser(user._id, { token });
-
     res.status(200).send({ user, token })
   } catch (error) {
     next(error)

@@ -16,7 +16,7 @@ axios.defaults.baseURL = 'http://localhost:5000';
 
 export const token = {
   set(token) {
-    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+    axios.defaults.headers.common.Authorization = token;
   },
   unset() {
     axios.defaults.headers.common.Authorization = '';
@@ -41,7 +41,6 @@ const login = userData => async dispatch => {
 
   try {
     const res = await axios.post('/api/login', userData);
-    console.log(res);
     token.set(res.data.token);
     dispatch(loginSuccess(res.data.user));
     dispatch(financeOperation.getFinance());
