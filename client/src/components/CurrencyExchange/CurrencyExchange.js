@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
 import { bankDataOperations } from '../../redux/bankData';
-
+import { filterData } from '../../services'
 import styles from './CurrencyExchange.module.css';
 
 export default function CurrencyExchange() {
@@ -12,18 +11,6 @@ export default function CurrencyExchange() {
   const isLoading = useSelector(state => state.bankData.isLoading);
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
 
-  const FilteredData = () => {
-    if (!dataFromBank) {
-      return null;
-    }
-    const filteredData = dataFromBank.filter(el => el.ccy !== 'BTC');
-    return filteredData.map(el => ({
-      ...el,
-      buy: Number(el.buy).toFixed(2),
-      sale: Number(el.sale).toFixed(2),
-    }));
-  }
-
   useEffect(() => {
     if (dataFromBank || !isAuthenticated) {
       return;
@@ -31,12 +18,18 @@ export default function CurrencyExchange() {
     dispatch(bankDataOperations.getBankData());
   }, [dispatch, dataFromBank, isAuthenticated]);
 
+  const filteredData = () => {
+    if (dataFromBank) {
+      return filterData(dataFromBank)
+    }
+  }
+
   return (
     <section className={styles.CurrencyExchange__container}>
       <div className={styles.CurrencyExchange}>
         {isLoading ? (
           <div>isLoading...</div>// should be changed to Loader-spinner
-        ) : FilteredData ? (
+        ) : dataFromBank ? (
           <table className={styles.CurrencyExchange__table}>
             <thead>
               <tr className={styles.CurrencyExchange__headerRow}>
@@ -46,7 +39,7 @@ export default function CurrencyExchange() {
               </tr>
             </thead>
             <tbody>
-              {FilteredData.map(el => (
+              {filteredData().map(el => (
                 <tr key={el.ccy} className={styles.CurrencyExchange__bodyRow}>
                   <td>{el.ccy}</td>
                   <td>{el.buy}</td>

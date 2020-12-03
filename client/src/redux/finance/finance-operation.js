@@ -12,18 +12,14 @@ const getFinance = () => async (dispatch, getState) => {
   try {
     const {
       auth: {
-        user: { id },
+        user: { _id },
       },
     } = getState();
     dispatch(getFinanceRequest());
-    const {
-      data: {
-        finance: { totalBalance, data },
-      },
-    } = await axios.get(`api/finance/${id}`);
-    dispatch(getFinanceSuccess({ totalBalance, data }));
+    const data = await axios.get(`api/finance/${_id}`);
+    dispatch(getFinanceSuccess(data.data));
   } catch (error) {
-    dispatch(getError(error));
+    console.error(error)
   }
 };
 

@@ -18,7 +18,7 @@ import "./css/styles.css";
 
 function App() {
   const dispatch = useDispatch();
-  const [width, setWidth] = useState(null);
+  const [width, setWidth] = useState(window.innerWidth);
 
   const changeWidth = () => {
     setWidth(window.innerWidth);

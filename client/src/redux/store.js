@@ -15,8 +15,8 @@ import {
   isMobileReducer,
   isTabletReducer,
 } from "./resolution/resolution-reducers";
-// import { financeReducer } from './finance';
-// import { bankDataReducer } from './bankData';
+import { financeReducer } from './finance';
+import { bankDataReducer } from './bankData';
 
 const middleware = [
   ...getDefaultMiddleware({
@@ -37,8 +37,8 @@ const store = configureStore({
     auth: persistReducer(persistStoreConfig, authReducer),
     isMobile: isMobileReducer,
     isTablet: isTabletReducer,
-    // finance: financeReducer,
-    // bankData: bankDataReducer,
+    finance: financeReducer,
+    bankData: bankDataReducer,
   },
   middleware,
   devTools: process.env.NODE_ENV === "development",
