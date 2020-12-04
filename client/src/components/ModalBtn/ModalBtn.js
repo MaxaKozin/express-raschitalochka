@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
-import Modal from '../Modal/Modal';
-import styles from './ModalBtn.module.css';
-import AddTransaction from '../AddTransaction';
-import { costs, income } from './categoryValues';
-import { financeOperation } from '../../redux/finance';
-import { transactionTypes } from '../../common';
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
+import Modal from "../Modal/Modal";
+import styles from "./ModalBtn.module.css";
+import AddTransaction from "../AddTransaction";
+import { costs, income } from "./categoryValues";
+import { financeOperation } from "../../redux/finance";
+import { transactionTypes } from "../../common";
 
 export default function ModalBtn() {
   const [componentInModal, setComponentInModal] = useState("");
@@ -28,7 +28,7 @@ export default function ModalBtn() {
   return (
     <>
       <div className={styles.modalBtnBox}>
-        {isMobile && (
+        {isMobile ? (
           <>
             <NavLink className={styles.modalBtn} exact to={"/addincome"}>
               Add Income
@@ -37,8 +37,7 @@ export default function ModalBtn() {
               Add Cost
             </NavLink>
           </>
-        )}
-        {!isMobile && (
+        ) : (
           <>
             <button
               className={styles.modalBtn}
