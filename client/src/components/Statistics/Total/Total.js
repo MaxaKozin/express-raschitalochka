@@ -1,37 +1,13 @@
 //Important!!! need to be strongly reviewed, refactoring
-import React from 'react';
-import T from 'prop-types';
-import { useSelector } from 'react-redux';
-import styles from './Total.module.css';
+import React from "react";
+import T from "prop-types";
+import styles from "./Total.module.css";
 
-export default function Total({ totalCostByParameter }) {
-  const transactionHistory = useSelector(state => state.finance.transactionHistory);
-
-  const getCostTransactions = (transactionHistory) => {
-    return transactionHistory.filter(({ type }) => type.includes('-'));
-  };
-
-  const costTransactions = getCostTransactions(transactionHistory);
-
-  const getTotalCost = (costTransactions) => {
-    return costTransactions.reduce((count, item) => count + item.amount, 0);
-  };
-
-  const totalCost = getTotalCost(costTransactions);
-
-  const getIncomeTransactions = (transactionHistory) => {
-    return transactionHistory.filter(({ type }) => type.includes('+'));
-  };
-
-  const incomeTransactions = getIncomeTransactions(transactionHistory);
-
-  const getTotalIncome = (incomeTransactions => {
-    return incomeTransactions.reduce((count, item) => count + item.amount, 0);
-  });
-
-  const totalIncome = getTotalIncome(incomeTransactions);
-
-
+export default function Total({
+  totalCostByParameter,
+  totalCost,
+  totalIncome,
+}) {
   return (
     <ul className={styles.List}>
       {totalCostByParameter ? (
@@ -48,25 +24,17 @@ export default function Total({ totalCostByParameter }) {
           </li>
         </>
       ) : (
-          <li>
-            <span className={styles.Name}>Total Costs:</span>
-            <span className={(styles.Value, styles.Costs)}>{totalCost}</span>
-          </li>
-        )}
-      {/* <li>
-      <span className={styles.Name}>
-        {totalCostByParameter ? 'Total Costs selected' : 'Total Costs'}:
-      </span>
-      <span className={(styles.Value, styles.Costs)}>
-        {totalCostByParameter ? totalCostByParameter : totalCost}
-      </span>
-    </li> */}
+        <li>
+          <span className={styles.Name}>Total Costs:</span>
+          <span className={(styles.Value, styles.Costs)}>{totalCost}</span>
+        </li>
+      )}
       <li>
         <span className={styles.Name}>Total Income:</span>
         <span className={(styles.Value, styles.Income)}>{totalIncome}</span>
       </li>
     </ul>
-  )
+  );
 }
 
 Total.defaultProps = {
@@ -78,6 +46,40 @@ Total.propTypes = {
   totalCost: T.number,
   totalIncome: T.number,
 };
+
+{
+  /* <li>
+      <span className={styles.Name}>
+        {totalCostByParameter ? 'Total Costs selected' : 'Total Costs'}:
+      </span>
+      <span className={(styles.Value, styles.Costs)}>
+        {totalCostByParameter ? totalCostByParameter : totalCost}
+      </span>
+    </li> */
+}
+
+// const getCostTransactions = (transactionHistory) => {
+//   return transactionHistory.filter(({ type }) => type.includes("-"));
+// };
+
+// const costTransactions = getCostTransactions(transactionHistory);
+
+// const getTotalCost = (costTransactions) => {
+//   return costTransactions.reduce((count, item) => count + item.amount, 0);
+// };
+
+// const totalCost = getTotalCost(costTransactions);
+// const getIncomeTransactions = (transactionHistory) => {
+//   return transactionHistory.filter(({ type }) => type.includes("+"));
+// };
+
+// const incomeTransactions = getIncomeTransactions(transactionHistory);
+
+// const getTotalIncome = (incomeTransactions) => {
+//   return incomeTransactions.reduce((count, item) => count + item.amount, 0);
+// };
+
+// const totalIncome = getTotalIncome(incomeTransactions);
 
 // const mapStateToProps = state => ({
 //   totalCost: financeSelectors.getTotalCost(state),
