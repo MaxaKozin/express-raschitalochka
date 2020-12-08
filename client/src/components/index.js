@@ -7,3 +7,4 @@ export { default as AppBar } from './AppBar';
 export { default as ModalBtn } from './ModalBtn';
 export { default as TransferMobile } from './TransferHistory/TransferHistoryMobile';
 export { default as TransferPcTablet } from './TransferHistory/TransferHistoryPcTablet';
+export { default as Dashboard } from './Dashboard';

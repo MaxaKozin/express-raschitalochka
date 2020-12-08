@@ -30,7 +30,7 @@ export default function Modal({ title, children, onClose }) {
     onClose();
   };
 
-  return createPortal(
+  return (createPortal(
     <div className={styles.modal_wrapper} onClick={handleBackdropClick}>
       <div className={styles.modal_content}>
         <div className={styles.heading_wrapper}>
@@ -45,5 +45,5 @@ export default function Modal({ title, children, onClose }) {
       </div>
     </div>,
     MODAL_ROOT,
-  );
+  ));
 };

@@ -5,7 +5,6 @@ const getBankData = () => async dispatch => {
   dispatch(getBankDataRequest());
   try {
     const { data } = await axios_bank_instance.get();
-    console.log(data);
     if (typeof data === 'string') {
       dispatch(getBankDataSuccess(null));
       return;

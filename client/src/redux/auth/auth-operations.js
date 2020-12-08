@@ -14,7 +14,7 @@ import {
 
 axios.defaults.baseURL = 'http://localhost:5000';
 
-export const token = {
+const token = {
   set(token) {
     axios.defaults.headers.common.Authorization = token;
   },
