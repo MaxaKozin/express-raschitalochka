@@ -1,6 +1,5 @@
 import React from 'react';
 import { useSelector } from 'react-redux'
-import PropTypes from 'prop-types';
 import styles from './TotalBalance.module.css';
 
 export default function TotalBalance() {
@@ -13,7 +12,3 @@ export default function TotalBalance() {
     </div>
   )
 }
-
-TotalBalance.propTypes = {
-  balance: PropTypes.number.isRequired,
-};

@@ -15,6 +15,13 @@ import {
 } from "./redux/resolution/resolution-operations";
 // import * as routes from './constants/routes';
 import "./css/styles.css";
+import { Dashboard } from "./components";
+
+function Statistics() {
+  return (
+    <h1>STATISTICS</h1>
+  )
+}
 
 function App() {
   const dispatch = useDispatch();
@@ -60,6 +67,14 @@ function App() {
           exact
           redirectTo={"login"}
           component={Home}
+          child={Dashboard}
+        />
+        <PrivateRoute
+          path={"/statistics"}
+          exact
+          redirectTo={"login"}
+          component={Home}
+          child={Statistics}
         />
       </Switch>
     </div>
