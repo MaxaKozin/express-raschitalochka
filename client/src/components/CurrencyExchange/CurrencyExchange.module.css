@@ -96,16 +96,18 @@
     height: auto;
   }
 }
-@media screen and (min-width: 768px) and (max-width: 1279px) {
+@media screen and (min-width: 768px) and (max-width: 1023px) {
   .CurrencyExchange__container {
     background-image: none;
     margin-bottom: 40px;
+    margin: 0 auto;
+    width: 700px;
   }
   .CurrencyExchange {
     margin: 0;
   }
 }
-@media screen and (min-width: 1280px) {
+@media screen and (min-width: 1024px) {
   .CurrencyExchange__container {
     background-size: 200%;
     height: 470px;

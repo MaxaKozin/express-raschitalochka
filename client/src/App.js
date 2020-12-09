@@ -25,10 +25,10 @@ function Statistics() {
 
 function App() {
   const dispatch = useDispatch();
-  const [width, setWidth] = useState(window.innerWidth);
+  const [width, setWidth] = useState(window.screen.width);
 
   const changeWidth = () => {
-    setWidth(window.innerWidth);
+    setWidth(window.screen.width);
   };
 
   useEffect(() => {
