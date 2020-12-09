@@ -1,10 +1,12 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import styles from './TransferHistoryPcTablet.module.css';
+import React from "react";
+import { useSelector } from "react-redux";
+import styles from "./TransferHistoryPcTablet.module.css";
 const { tableShadow, table, tableRow, tableTopRow, th, td } = styles;
 
 export default function TransferHistoryPcTablet() {
-  const transactionHistory = useSelector(state => state.finance.transactionHistory);
+  const transactionHistory = useSelector(
+    (state) => state.finance.transactionHistory
+  );
 
   return (
     <section className={tableShadow}>
@@ -23,25 +25,25 @@ export default function TransferHistoryPcTablet() {
           {transactionHistory.map(
             (
               { date, type, category, comments, amount, balanceAfter },
-              index,
+              index
             ) => (
-                <tr key={index} className={tableRow}>
-                  <td className={td}>{new Date(date).toLocaleDateString()}</td>
-                  <td className={td}>{type}</td>
-                  <td className={td}>{category}</td>
-                  <td className={td}>{comments}</td>
-                  <td
-                    className={td}
-                    style={{ color: type === '+' ? '#75c16e' : '#ff6c00' }}
-                  >
-                    {amount}
-                  </td>
-                  <td className={td}>{balanceAfter}</td>
-                </tr>
-              ),
+              <tr key={index} className={tableRow}>
+                <td className={td}>{new Date(date).toLocaleDateString()}</td>
+                <td className={td}>{type}</td>
+                <td className={td}>{category}</td>
+                <td className={td}>{comments}</td>
+                <td
+                  className={td}
+                  style={{ color: type === "+" ? "#75c16e" : "#ff6c00" }}
+                >
+                  {amount}
+                </td>
+                <td className={td}>{balanceAfter}</td>
+              </tr>
+            )
           )}
         </tbody>
       </table>
     </section>
   );
-};
+}

@@ -41,7 +41,7 @@ function App() {
   }, [width, dispatch]);
 
   return (
-    <div>
+    <>
       <Switch>
         <PublicRoute
           path={"/login"}
@@ -72,7 +72,7 @@ function App() {
           child={Statistics}
         />
       </Switch>
-    </div>
+    </>
   );
 }
 

@@ -32,7 +32,7 @@ const serverInit = async () => {
   app.use("/api/finance", financeRouter);
 
   app.use((err, req, res, next) => {
-    delete err.stack;
+    // delete err.stack;
     next(err);
   });
 
