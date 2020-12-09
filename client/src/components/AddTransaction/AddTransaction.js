@@ -1,18 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import RadioBtn from '../RadioButton';
+import RadioBtn from "../RadioButton";
 
-import styles from './AddTransaction.module.css';
+import styles from "./AddTransaction.module.css";
 
-export default function AddTransaction({ onSubmit, onCloseModal, radioButtonData, type }) {
-  const [category, setCategory] = useState('');
+export default function AddTransaction({
+  onSubmit,
+  onCloseModal,
+  radioButtonData,
+  type,
+}) {
+  const [category, setCategory] = useState("");
   const [amount, setAmount] = useState(null);
   const [date, setDate] = useState(null);
-  const [comment, setComment] = useState('');
+  const [comments, setComments] = useState("");
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit({ category, amount, date, comment, type });
+    onSubmit({ category, amount, date, comments, type });
     onCloseModal();
   };
 
@@ -43,7 +48,7 @@ export default function AddTransaction({ onSubmit, onCloseModal, radioButtonData
       </div>
       <div className={styles.categories_wrapper}>
         <h2 className={styles.categories_title}>Categories</h2>
-        {radioButtonData.map(value => (
+        {radioButtonData.map((value) => (
           <RadioBtn
             value={value}
             key={value}
@@ -57,7 +62,7 @@ export default function AddTransaction({ onSubmit, onCloseModal, radioButtonData
           className={styles.comments}
           type="text"
           name="comments"
-          onChange={({ target: { value } }) => setComment(value)}
+          onChange={({ target: { value } }) => setComments(value)}
         />
       </div>
       <button type="submit" className={styles.button}>
@@ -65,4 +70,4 @@ export default function AddTransaction({ onSubmit, onCloseModal, radioButtonData
       </button>
     </form>
   );
-};
+}
