@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppBar, NavBar, CurrencyExchange, TotalBalance } from '../../../components';
+import { AppBar, NavBar, TotalBalance } from '../../../components';
 import styles from './HomeTablet.module.css'
 
 

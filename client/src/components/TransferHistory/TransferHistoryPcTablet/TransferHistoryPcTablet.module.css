@@ -12,7 +12,11 @@
   font-size: 13px;
   font-family: var(--main-ff);
   font-weight: 300;
-  margin-bottom: 30px;
+}
+
+.tableBody {
+  height: 658px;
+  overflow: scroll;
 }
 
 .th,

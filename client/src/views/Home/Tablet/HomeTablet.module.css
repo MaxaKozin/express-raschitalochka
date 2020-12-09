@@ -1,5 +1,9 @@
 .wrapper {
   max-width: 768px;
+  background-image: url(../../../assets/images/bg-tablet.png);
+  background-repeat: no-repeat;
+  background-position: bottom;
+  margin: 0 auto;
 }
 .navWrapper {
   display: flex;

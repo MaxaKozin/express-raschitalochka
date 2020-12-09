@@ -8,6 +8,7 @@ import {
 import Login from "./views/Login";
 import Registration from "./views/Registration";
 import Home from "./views/Home";
+import HomeMobile from "./views/Home/Mobile";
 import {
   setIsDesktop,
   setIsMobile,
@@ -15,11 +16,21 @@ import {
 } from "./redux/resolution/resolution-operations";
 // import * as routes from './constants/routes';
 import "./css/styles.css";
-import { Dashboard } from "./components";
+import { Dashboard, CurrencyExchange } from "./components";
 
 function Statistics() {
   return (
     <h1>STATISTICS</h1>
+  )
+}
+function AddIncome() {
+  return (
+    <h1>Add Income</h1>
+  )
+}
+function AddCost() {
+  return (
+    <h1>Add Costs</h1>
   )
 }
 
@@ -65,16 +76,37 @@ function App() {
         <PrivateRoute
           path={"/"}
           exact
-          redirectTo={"login"}
+          redirectTo={"/login"}
           component={Home}
           child={Dashboard}
         />
         <PrivateRoute
           path={"/statistics"}
           exact
-          redirectTo={"login"}
+          redirectTo={"/"}
           component={Home}
           child={Statistics}
+        />
+        <PrivateRoute
+          path={"/currency"}
+          exact
+          redirectTo={"/"}
+          component={HomeMobile}
+          child={CurrencyExchange}
+        />
+        <PrivateRoute
+          path={"/addincome"}
+          exact
+          redirectTo={"/"}
+          component={HomeMobile}
+          child={AddIncome}
+        />
+        <PrivateRoute
+          path={"/addcost"}
+          exact
+          redirectTo={"/"}
+          component={HomeMobile}
+          child={AddCost}
         />
       </Switch>
     </div>
