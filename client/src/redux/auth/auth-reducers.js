@@ -7,7 +7,7 @@ import {
   registerSuccess,
   loginRequest,
   loginSuccess,
-  // logoutSuccess,
+  logoutSuccess,
   // getCurrentUserRequest,
   // getCurrentUserSuccess,
 } from './auth-actions';
@@ -17,13 +17,13 @@ const initialUserState = { name: null, email: null };
 const user = createReducer(initialUserState, {
   [registerSuccess]: (_, { payload }) => payload,
   [loginSuccess]: (_, { payload }) => payload,
-  // [logoutSuccess]: () => initialUserState,
+  [logoutSuccess]: () => initialUserState,
 });
 
 const token = createReducer(null, {
   [registerSuccess]: (_, { payload }) => payload.token,
   [loginSuccess]: (_, { payload }) => payload.token,
-  // [logoutSuccess]: () => null,
+  [logoutSuccess]: () => null,
 });
 
 const setError = (_, { payload }) => payload.message;
@@ -37,7 +37,7 @@ const isAuthenticated = createReducer(false, {
   [registerSuccess]: () => true,
   [loginSuccess]: () => true,
   // [getCurrentUserSuccess]: () => true,
-  // [logoutSuccess]: () => false,
+  [logoutSuccess]: () => false,
 });
 
 const isLoading = createReducer(false, {
@@ -45,7 +45,7 @@ const isLoading = createReducer(false, {
   [registerSuccess]: () => false,
   [loginRequest]: () => true,
   [loginSuccess]: () => false,
-  // [logoutSuccess]: () => false,
+  [logoutSuccess]: () => false,
   // [getCurrentUserRequest]: () => true,
   // [getCurrentUserSuccess]: () => false,
   [getError]: () => false,

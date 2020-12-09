@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import HomeDesktop from './Desktop';
 import HomeTablet from './Tablet';
+import HomeMobile from './Mobile';
 
 export default function Home({ children }) {
   const isLoading = useSelector((state) => state.auth.isLoading);
@@ -15,7 +16,7 @@ export default function Home({ children }) {
           {" "}
           LOADING ...
         </div> // should be changed to loader-spinner
-      ) : (isMobile ? (<h1>MOBILE</h1>)
+      ) : (isMobile ? (<HomeMobile children={children} />)
         : (isTablet ? (<HomeTablet children={children} />)
           : (<HomeDesktop children={children} />)))
       }
