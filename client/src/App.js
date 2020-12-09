@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Switch } from "react-router-dom";
-import {
-  PrivateRoute,
-  PublicRoute,
-} from "./common";
+import { PrivateRoute, PublicRoute } from "./common";
 import Login from "./views/Login";
 import Registration from "./views/Registration";
 import Home from "./views/Home";
@@ -18,9 +15,7 @@ import "./css/styles.css";
 import { Dashboard } from "./components";
 
 function Statistics() {
-  return (
-    <h1>STATISTICS</h1>
-  )
+  return <h1>STATISTICS</h1>;
 }
 
 function App() {
