@@ -3,8 +3,11 @@ import { useSelector } from 'react-redux';
 import styles from './TransferHistoryPcTablet.module.css';
 const { tableShadow, table, tableRow, tableTopRow, tableBody, th, td } = styles;
 
+
 export default function TransferHistoryPcTablet() {
-  const transactionHistory = useSelector(state => state.finance.transactionHistory);
+  const transactionHistory = useSelector(
+    (state) => state.finance.transactionHistory
+  );
 
   return (
     <section className={tableShadow}>
@@ -48,4 +51,4 @@ export default function TransferHistoryPcTablet() {
       </div>
     </section>
   );
-};
+}
