@@ -1,9 +1,9 @@
 import React from 'react';
-import { AppBar, NavBar, CurrencyExchange, TotalBalance } from '../../components';
-import styles from './Home.module.css'
+import { AppBar, NavBar, CurrencyExchange, TotalBalance } from '../../../components';
+import styles from './HomeDesktop.module.css'
 
 
-export default function Home({ children }) {
+export default function HomeDesktop({ children }) {
   return (
     <>
       <AppBar />

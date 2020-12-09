@@ -11,7 +11,7 @@
   }
 }
 
-@media screen and (min-width: 768px) and (max-width: 1279px) {
+@media screen and (min-width: 768px) and (max-width: 1023px) {
   .aside_box {
     display: flex;
     width: 480px;
@@ -34,12 +34,13 @@
   .main_container {
     width: 700px;
     box-shadow: 10px 17.321px 20px rgba(1, 1, 0, 0.15);
+    margin: 0 auto;
   }
 }
 
-@media (min-width: 1280px) {
+@media (min-width: 1024px) {
   .page_wrap {
-    width: 1280px;
+    width: 1024px;
     display: flex;
     justify-content: space-between;
   }

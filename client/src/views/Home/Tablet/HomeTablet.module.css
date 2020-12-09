@@ -1,0 +1,7 @@
+.wrapper {
+  max-width: 768px;
+}
+.navWrapper {
+  display: flex;
+  justify-content: center;
+}

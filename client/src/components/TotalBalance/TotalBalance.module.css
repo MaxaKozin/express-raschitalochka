@@ -33,7 +33,7 @@
   }
 }
 
-@media screen and (min-width: 768px) and (max-width: 1279px) {
+@media screen and (min-width: 768px) and (max-width: 1023px) {
   .totalBalanceBox {
     display: flex;
     align-items: center;
@@ -56,7 +56,7 @@
   }
 }
 
-@media screen and (min-width: 1280px) {
+@media screen and (min-width: 1024px) {
   .totalBalanceBox {
     width: 100%;
     margin-bottom: 40px;
