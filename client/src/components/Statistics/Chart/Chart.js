@@ -1,17 +1,17 @@
-import React from 'react';
-import T from 'prop-types';
-import ChartWrapper from '../ChartWrapper';
-import { VictoryPie } from 'victory';
+import React from "react";
+import T from "prop-types";
+import ChartWrapper from "../ChartWrapper";
+import { VictoryPie } from "victory";
 
 const styles = {
   data: {
-    stroke: '#fff',
+    stroke: "#fff",
     strokeWidth: 1,
     fill: ({ datum }) => datum.fill,
   },
   labels: {
     fontSize: 13,
-    fill: '#fff',
+    fill: "#fff",
     labelRadius: 60,
   },
 };
@@ -30,7 +30,7 @@ export default function Chart({ data }) {
       />
     </ChartWrapper>
   );
-};
+}
 
 Chart.propTypes = {
   data: T.array.isRequired,
