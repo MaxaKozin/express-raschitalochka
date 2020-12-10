@@ -55,6 +55,6 @@
   }
 
   .main_container__table {
-    box-shadow: none;
+    border-radius: 5px;
   }
 }

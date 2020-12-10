@@ -1,0 +1,17 @@
+.row {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  height: 72px;
+  list-style: none;
+  align-items: center;
+}
+
+.cell {
+  text-align: center;
+  border-collapse: collapse;
+  font-size: 13px;
+  font-family: var(--main-ff);
+  font-weight: 300;
+  width: 100px;
+}
