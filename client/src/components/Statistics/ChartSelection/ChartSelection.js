@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
-import UpdateChartBtn from '../UpdateChartBtn';
-import styles from './ChartSelection.module.css';
-import monthList from './month.json';
-import yearList from './year.json';
+import React, { useState } from "react";
+import UpdateChartBtn from "../UpdateChartBtn";
+import styles from "./ChartSelection.module.css";
+import monthList from "./month.json";
+import yearList from "./year.json";
 
-export default function ChartSelection(updateDiagram) {
-  const [month, setMonth] = useState('');
-  const [year, setYear] = useState('');
+export default function ChartSelection({ updateDiagram }) {
+  const [month, setMonth] = useState("");
+  const [year, setYear] = useState("");
 
-  const onChangeMonthHandler = e => {
-    setMonth(e.target.value)
+  const onChangeMonthHandler = (e) => {
+    setMonth(e.target.value);
   };
 
-  const onChangeYearHandler = e => {
-    setYear(e.target.value)
+  const onChangeYearHandler = (e) => {
+    setYear(e.target.value);
   };
 
   const updateDiagramHandler = () => {

@@ -6,6 +6,7 @@ import Login from "./views/Login";
 import Registration from "./views/Registration";
 import Home from "./views/Home";
 import HomeMobile from "./views/Home/Mobile";
+import Statistics from "./components/Statistics";
 import {
   setIsDesktop,
   setIsMobile,
@@ -15,18 +16,11 @@ import {
 import "./css/styles.css";
 import { Dashboard, CurrencyExchange } from "./components";
 
-function Statistics() {
-  return <h1>STATISTICS</h1>;
-}
 function AddIncome() {
-  return (
-    <h1>Add Income</h1>
-  )
+  return <h1>Add Income</h1>;
 }
 function AddCost() {
-  return (
-    <h1>Add Costs</h1>
-  )
+  return <h1>Add Costs</h1>;
 }
 
 function App() {
