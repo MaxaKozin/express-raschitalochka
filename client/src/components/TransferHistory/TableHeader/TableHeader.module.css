@@ -1,0 +1,19 @@
+.headerBlock {
+  display: flex;
+  list-style: none;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #f3f6f6;
+}
+
+.cell {
+  height: 72px;
+  text-align: center;
+  font-family: var(--main-ff);
+  font-size: 15px;
+  line-height: 72px;
+  font-weight: bold;
+  text-transform: capitalize;
+  width: 100px;
+}

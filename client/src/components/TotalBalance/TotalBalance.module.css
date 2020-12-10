@@ -39,6 +39,7 @@
     align-items: center;
     font-family: var(--main-ff);
     color: var(--lightgrey-color);
+    line-height: 80px;
   }
 
   .titleParagraph {
