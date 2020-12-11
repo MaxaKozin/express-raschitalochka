@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import RadioBtn from "../RadioButton";
 import styles from "./AddTransaction.module.css";
 
@@ -7,11 +7,23 @@ export default function AddTransaction({
   onCloseModal,
   radioButtonData,
   type,
+  cat, am, dt, cmts, chkd
 }) {
   const [category, setCategory] = useState("");
-  const [amount, setAmount] = useState(null);
-  const [date, setDate] = useState(null);
+  const [amount, setAmount] = useState('');
+  const [date, setDate] = useState('');
   const [comments, setComments] = useState("");
+  const [checked, setChecked] = useState("");
+
+  useEffect(() => {
+    setCategory(cat || '');
+    setAmount(am || '')
+    if (dt) {
+      setDate(dt.split("T")[0])
+    }
+    setComments(cmts || '')
+    setChecked(chkd || '')
+  }, [am, cat, chkd, cmts, dt]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -30,6 +42,7 @@ export default function AddTransaction({
             min="0"
             max="99999"
             step="0.01"
+            value={amount}
             onChange={({ target: { value } }) => setAmount(value)}
             required
           />
@@ -39,8 +52,9 @@ export default function AddTransaction({
             className={styles.date}
             name="date"
             type="date"
+            value={date}
             required
-            onChange={({ target }) => setDate(target.valueAsNumber)}
+            onChange={({ target }) => setDate(target.value)}
           />
         </div>
       </div>
@@ -50,7 +64,8 @@ export default function AddTransaction({
           <RadioBtn
             value={value}
             key={value}
-            onChange={({ target: { value } }) => setCategory(value)}
+            onChange={({ target: { value } }) => { setCategory(value); setChecked(value) }}
+            checked={value === checked ? true : false}
           />
         ))}
       </div>
@@ -60,6 +75,7 @@ export default function AddTransaction({
           className={styles.comments}
           type="text"
           name="comments"
+          value={comments}
           onChange={({ target: { value } }) => setComments(value)}
         />
       </div>
