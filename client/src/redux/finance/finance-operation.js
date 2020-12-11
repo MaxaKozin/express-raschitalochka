@@ -4,7 +4,11 @@ import {
   addTransactionSuccess,
   getFinanceSuccess,
   getFinanceRequest,
-  getError,
+  updateTransactionRequest,
+  updateTransactionSuccess,
+  deleteTransactionRequest,
+  deleteTransactionSuccess,
+  // getError,
 } from "./finance-action";
 import { transactionTypes } from "../../common";
 
@@ -51,12 +55,39 @@ const addTransaction = (userData) => async (dispatch, getState) => {
     } = await axios.post(`api/finance/${_id}`, sendData);
 
     dispatch(addTransactionSuccess({ balance, data }));
-  } catch (e) {
-    dispatch(getError(e));
+  } catch (error) {
+    console.log(error);
   }
 };
 
-export default {
+const updateTransaction = (transactionId, patchedData) => async (dispatch, getState) => {
+  dispatch(updateTransactionRequest);
+  try {
+    const {
+      auth: {
+        user: { _id },
+      },
+    } = getState();
+    const data = await axios.patch(`api/finance/${_id}`, { transactionId, patchedData });
+    dispatch(updateTransactionSuccess(data))
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+
+// const deleteTransaction = (transactionId) => async (dispatch, getState) => {
+//   try {
+
+//     await axios.delete(`api/finance/${_id}`, { transactionId });
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
+
+export {
   addTransaction,
   getFinance,
+  updateTransaction,
+  // deleteTransaction
 };

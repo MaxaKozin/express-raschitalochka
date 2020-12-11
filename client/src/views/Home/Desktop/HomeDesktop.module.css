@@ -3,5 +3,6 @@
   margin: 0 auto;
   display: grid;
   grid-template-columns: 250px 3fr;
-  grid-gap: 40px;
+  grid-gap: 20px;
+  padding: 0 10px;
 }

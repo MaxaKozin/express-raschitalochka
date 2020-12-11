@@ -28,11 +28,11 @@ const register = userData => async dispatch => {
 
   try {
     const res = await axios.post('/api/register', userData);
-    console.log(res);
+    console.log(res.data);
     token.set(res.data.token)
-    dispatch(registerSuccess(res.data.user));
+    dispatch(registerSuccess(res.data));
   } catch (error) {
-    console.error(error);;
+    console.error(error);
   }
 };
 
@@ -84,7 +84,7 @@ const getCurrentUser = () => async (dispatch, getState) => {
   }
 };
 
-export default {
+export {
   logOut,
   getCurrentUser,
   register,

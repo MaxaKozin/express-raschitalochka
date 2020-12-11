@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-
 import RadioBtn from "../RadioButton";
-
 import styles from "./AddTransaction.module.css";
 
 export default function AddTransaction({
