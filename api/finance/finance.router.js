@@ -12,6 +12,6 @@ const financeRouter = Router();
 financeRouter.get("/:userId", verifyTokenMdlw, getFinanceController);
 financeRouter.post("/:userId", verifyTokenMdlw, addTransactionController);
 financeRouter.patch("/:userId", verifyTokenMdlw, updateTransactionController);
-financeRouter.delete("/:userId", verifyTokenMdlw, deleteTransactionController);
+// financeRouter.delete("/:userId", verifyTokenMdlw, deleteTransactionController);
 
 module.exports = financeRouter;
