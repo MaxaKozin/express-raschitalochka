@@ -1,6 +1,6 @@
 const { createAction } = require('@reduxjs/toolkit');
 
-export const getError = createAction('finance/getError');
+// export const getError = createAction('finance/getError');
 
 export const getFinanceRequest = createAction('finance/getFinanceRequest');
 export const getFinanceSuccess = createAction('finance/getFinanceSuccess');
@@ -16,4 +16,18 @@ export const addTransactionRequest = createAction(
 );
 export const addTransactionSuccess = createAction(
   'finance/addTransactionSuccess',
+);
+
+export const updateTransactionRequest = createAction(
+  'finance/updateTransactionsRequest',
+);
+export const updateTransactionSuccess = createAction(
+  'finance/updateTransactionsSuccess',
+);
+
+export const deleteTransactionRequest = createAction(
+  'finance/updateTransactionsSuccess',
+);
+export const deleteTransactionSuccess = createAction(
+  'finance/updateTransactionsSuccess',
 );

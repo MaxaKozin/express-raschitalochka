@@ -2,23 +2,32 @@ import { combineReducers, createReducer } from '@reduxjs/toolkit';
 import {
   getFinanceRequest,
   getFinanceSuccess,
+  addCostRequest,
+  addCostSuccess,
+  addIncomeRequest,
+  addIncomeSuccess,
   addTransactionRequest,
   addTransactionSuccess,
-  // getError,
+  updateTransactionRequest,
+  updateTransactionSuccess,
+  deleteTransactionRequest,
+  deleteTransactionSuccess,
 } from './finance-action';
 import { logoutSuccess } from '../auth/auth-actions';
 
 const totalBalance = createReducer(0, {
   [getFinanceSuccess]: (_, { payload }) => payload.totalBalance,
   [logoutSuccess]: () => 0,
-  // [addTransactionSuccess]: (_, { payload }) => payload.balance,
+  [addTransactionSuccess]: (_, { payload }) => payload.balance,
+  [updateTransactionSuccess]: (_, { payload }) => payload.balance
   // [getCurrentUserSuccess]: (_, { payload }) => payload.balance,
 });
 
 const transactionHistory = createReducer([], {
   [getFinanceSuccess]: (_, { payload }) => payload.finance,
   [logoutSuccess]: () => [],
-  // [addTransactionSuccess]: (_, { payload }) => payload.data,
+  [addTransactionSuccess]: (_, { payload }) => payload.data,
+  [updateTransactionSuccess]: (_, { payload }) => payload.data,
   // [getCurrentUserSuccess]: (_, { payload }) => payload.data,
 });
 
@@ -30,9 +39,12 @@ const transactionHistory = createReducer([], {
 
 const isLoading = createReducer(false, {
   [getFinanceRequest]: () => true,
-  // [addTransactionRequest]: () => true,
+  [addTransactionRequest]: () => true,
+  [updateTransactionRequest]: () => true,
   [getFinanceSuccess]: () => false,
-  // [addTransactionSuccess]: () => false,
+  [addTransactionSuccess]: () => false,
+  [updateTransactionSuccess]: () => false
+
   // [getError]: () => false,
 });
 

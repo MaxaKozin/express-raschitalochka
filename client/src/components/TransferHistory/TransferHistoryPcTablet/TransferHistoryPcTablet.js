@@ -15,11 +15,10 @@ export default function TransferHistoryPcTablet() {
       {transactionHistory.length === 0 ? (<h1 className={styles.warning}>Your transaction list empty. Pls add transactions to start supervise the accounts</h1>) : (
         <ul className={styles.tableBody}>
           {transactionHistory.map((
-            props,
-            index,
+            transaction
           ) => (
-              <li key={index} className={styles.tableRow}>
-                <TableRow {...props} />
+              <li key={transaction._id} className={styles.tableRow}>
+                <TableRow {...transaction} />
               </li>
             ))}
         </ul>

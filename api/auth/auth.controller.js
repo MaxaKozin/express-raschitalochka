@@ -23,7 +23,7 @@ const registrationController = async (req, res, next) => {
 
     await User.updateUser(user._id, { token });
 
-    res.status(200).send(token)
+    res.status(200).send({ user, token })
   } catch (error) {
     next(error)
   }
