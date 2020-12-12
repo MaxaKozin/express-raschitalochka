@@ -8,7 +8,6 @@ import {
   updateTransactionSuccess,
   deleteTransactionRequest,
   deleteTransactionSuccess,
-  // getError,
 } from "./finance-action";
 import { transactionTypes } from "../../common";
 
@@ -48,46 +47,48 @@ const addTransaction = (userData) => async (dispatch, getState) => {
       ...userData,
       type,
     };
-    const {
-      data: {
-        finance: { totalBalance: balance, data },
-      },
-    } = await axios.post(`api/finance/${_id}`, sendData);
+    const response = await axios.post(`api/finance/${_id}`, sendData);
 
-    dispatch(addTransactionSuccess({ balance, data }));
+    dispatch(addTransactionSuccess(response.data));
   } catch (error) {
     console.log(error);
   }
 };
 
 const updateTransaction = (transactionId, patchedData) => async (dispatch, getState) => {
-  dispatch(updateTransactionRequest);
+  dispatch(updateTransactionRequest());
   try {
     const {
       auth: {
         user: { _id },
       },
     } = getState();
-    const data = await axios.patch(`api/finance/${_id}`, { transactionId, patchedData });
-    dispatch(updateTransactionSuccess(data))
+    const response = await axios.patch(`api/finance/${_id}`, { data: { transactionId, patchedData }, headers: { 'Content-Type': 'application/json' } });
+    dispatch(updateTransactionSuccess(response.data))
   } catch (error) {
     console.log(error);
   }
 }
 
 
-// const deleteTransaction = (transactionId) => async (dispatch, getState) => {
-//   try {
-
-//     await axios.delete(`api/finance/${_id}`, { transactionId });
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
+const deleteTransaction = (transactionId) => async (dispatch, getState) => {
+  dispatch(deleteTransactionRequest())
+  try {
+    const {
+      auth: {
+        user: { _id },
+      },
+    } = getState();
+    const response = await axios.delete(`api/finance/${_id}`, { data: { transactionId }, headers: { 'Content-Type': 'application/json' } });
+    dispatch(deleteTransactionSuccess(response.data))
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 export {
   addTransaction,
   getFinance,
   updateTransaction,
-  // deleteTransaction
+  deleteTransaction
 };

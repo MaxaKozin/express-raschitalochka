@@ -12,8 +12,6 @@ export default function TableRow({ date, type, category, comments, amount, balan
 
   const updateTransactionSubmit = (patchedData) => {
     dispatch(financeOperation.updateTransaction(_id, patchedData));
-    console.log(patchedData, _id);
-
   }
 
   const closeModal = () => {
@@ -26,6 +24,10 @@ export default function TableRow({ date, type, category, comments, amount, balan
     } else {
       setComponentInModal("Add Cost");
     }
+  }
+
+  const onDelClick = () => {
+    dispatch(financeOperation.deleteTransaction(_id))
   }
 
   const localDate = new Date(date).toLocaleDateString();
@@ -42,10 +44,11 @@ export default function TableRow({ date, type, category, comments, amount, balan
         <li className={styles.cell}>{balanceAfter}</li>
         <li className={styles.cell + ' ' + styles.btnBlock}>
           <div className={styles.btn + ' ' + styles.btnEdit}
-            onClick={() => onEditClick(_id, type)}>
+            onClick={() => onEditClick(type)}>
             <span>EDIT</span>
           </div>
-          <div className={styles.btn + ' ' + styles.btnDel}>
+          <div className={styles.btn + ' ' + styles.btnDel}
+            onClick={() => onDelClick()}>
             <span>DEL</span>
           </div>
         </li>
@@ -59,7 +62,7 @@ export default function TableRow({ date, type, category, comments, amount, balan
                 radioButtonData={income}
                 onSubmit={updateTransactionSubmit}
                 onCloseModal={closeModal}
-                type={"Add Income"}
+                type={"+"}
                 am={amount}
                 dt={date}
                 cat={category}
@@ -71,7 +74,7 @@ export default function TableRow({ date, type, category, comments, amount, balan
                   radioButtonData={costs}
                   onSubmit={updateTransactionSubmit}
                   onCloseModal={closeModal}
-                  type={"Add Cost"}
+                  type={"-"}
                   am={amount}
                   dt={date}
                   cat={category}
