@@ -15,4 +15,4 @@ const getBankData = () => async dispatch => {
   }
 };
 
-export default { getBankData };
+export { getBankData };

@@ -20,7 +20,6 @@ export default function Dashboard() {
 
   const isMobile = useSelector((state) => state.isMobile);
   const isTablet = useSelector((state) => state.isTablet);
-  const isDesktop = !isMobile && !isTablet
 
   return (
     <>
