@@ -26,7 +26,7 @@ export const updateTransactionSuccess = createAction(
 );
 
 export const deleteTransactionRequest = createAction(
-  'finance/deleteTransactionSuccess',
+  'finance/deleteTransactionRequest',
 );
 export const deleteTransactionSuccess = createAction(
   'finance/deleteTransactionSuccess',

@@ -80,7 +80,6 @@ const deleteTransaction = (transactionId) => async (dispatch, getState) => {
       },
     } = getState();
     const response = await axios.delete(`api/finance/${_id}`, { data: { transactionId }, headers: { 'Content-Type': 'application/json' } });
-    console.log(response.data);
     dispatch(deleteTransactionSuccess(response.data))
   } catch (error) {
     console.log(error);
