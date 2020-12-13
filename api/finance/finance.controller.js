@@ -79,21 +79,23 @@ const updateTransactionController = async (req, res, next) => {
       }
       Object.assign(findTransaction, patchedData, patchBalance)
 
-      const newTransactions = user.finance.splice(user.finance.indexOf(findTransaction), 1, patchedTransaction)
+      await user.finance.splice(user.finance.indexOf(findTransaction), 1, patchedTransaction)
+
       const updatedUser = await User.updateUser(userId, {
-        finance: newTransactions,
+        finance: user.finance,
         totalBalance: patchedTransaction.balanceAfter,
       });
       res.status(200).send(updatedUser)
+      return
     }
 
     const patchedTransaction = new Object(findTransaction)
     Object.assign(patchedTransaction, patchedData)
 
     console.log("patchedTransaction:  ", patchedTransaction);
-    const newTransactions = user.finance.splice(user.finance.indexOf(findTransaction), 1, patchedTransaction);
+    user.finance.splice(user.finance.indexOf(findTransaction), 1, patchedTransaction);
 
-    const updatedUser = await User.updateUser(userId, { finance: newTransactions });
+    const updatedUser = await User.updateUser(userId, { finance: user.finance });
     res.status(200).send(updatedUser);
   } catch (error) {
     next(error)
