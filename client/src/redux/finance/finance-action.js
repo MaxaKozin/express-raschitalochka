@@ -19,15 +19,15 @@ export const addTransactionSuccess = createAction(
 );
 
 export const updateTransactionRequest = createAction(
-  'finance/updateTransactionsRequest',
+  'finance/updateTransactionRequest',
 );
 export const updateTransactionSuccess = createAction(
-  'finance/updateTransactionsSuccess',
+  'finance/updateTransactionSuccess',
 );
 
 export const deleteTransactionRequest = createAction(
-  'finance/updateTransactionsSuccess',
+  'finance/deleteTransactionSuccess',
 );
 export const deleteTransactionSuccess = createAction(
-  'finance/updateTransactionsSuccess',
+  'finance/deleteTransactionSuccess',
 );
