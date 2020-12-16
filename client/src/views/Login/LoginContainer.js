@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { lazy, Suspense, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { authOperations } from "../../redux/auth";
-import LoginDesktop from "./Desktop";
-import LoginMobile from "./Mobile";
-import LoginTablet from "./Tablet";
+// import LoginDesktop from "./Desktop";
+// import LoginMobile from "./Mobile";
+// import LoginTablet from "./Tablet";
+
+const LoginMobile = lazy(() => import("./Mobile"));
+const LoginTablet = lazy(() => import("./Tablet"));
+const LoginDesktop = lazy(() => import("./Desktop"));
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -50,31 +54,34 @@ export default function Login() {
     onBlurEmailHandler,
   };
 
-  const isMobile = useSelector(state => state.isMobile);
-  const isTablet = useSelector(state => state.isTablet);
-  const isDesktop = !isMobile && !isTablet
+  const isMobile = useSelector((state) => state.isMobile);
+  const isTablet = useSelector((state) => state.isTablet);
+  const isDesktop = !isMobile && !isTablet;
 
   const defineDevice = () => {
     if (isMobile) {
       return <LoginMobile {...params} />;
     }
     if (isDesktop) {
-      return <LoginDesktop {...params} />
+      return <LoginDesktop {...params} />;
     }
     if (isTablet) {
-      return <LoginTablet {...params} />
+      return <LoginTablet {...params} />;
     }
   };
 
   return (
-    <>
-      {isLoading ? (
-        <div style={{ position: "absolute", top: 30, right: 30 }}>
-          {" "}
-          LOADING ...
-        </div> // should be changed to loader-spinner
-      ) : (defineDevice())
-      }
-    </>
+    <Suspense fallback={<h2>Loading...</h2>}>
+      <>
+        {isLoading ? (
+          <div style={{ position: "absolute", top: 30, right: 30 }}>
+            {" "}
+            LOADING ...
+          </div> // should be changed to loader-spinner
+        ) : (
+          defineDevice()
+        )}
+      </>
+    </Suspense>
   );
 }
