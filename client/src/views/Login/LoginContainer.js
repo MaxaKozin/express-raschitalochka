@@ -4,6 +4,7 @@ import { authOperations } from "../../redux/auth";
 import LoginDesktop from "./Desktop";
 import LoginMobile from "./Mobile";
 import LoginTablet from "./Tablet";
+import { Loader } from '../../components';
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -69,10 +70,7 @@ export default function Login() {
   return (
     <>
       {isLoading ? (
-        <div style={{ position: "absolute", top: 30, right: 30 }}>
-          {" "}
-          LOADING ...
-        </div> // should be changed to loader-spinner
+        <Loader />
       ) : (defineDevice())
       }
     </>

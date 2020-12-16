@@ -4,6 +4,7 @@ import { authOperations } from '../../redux/auth';
 import RegistrationMobile from './Mobile';
 import RegistrationDesktop from './Desktop'
 import RegistrationTablet from './Tablet'
+import { Loader } from '../../components'
 
 
 export default function Registration() {
@@ -83,7 +84,7 @@ export default function Registration() {
   return (
     <>
       {isLoading ? (
-        <div style={{ position: 'absolute', top: 30, right: 30 }}> LOADING ...</div> // should be changed to loader-spinner
+        <Loader />
       ) : (defineDevice())
       }
     </>
