@@ -1,29 +1,28 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { authOperations } from '../../redux/auth';
-import RegistrationMobile from './Mobile';
-import RegistrationDesktop from './Desktop'
-import RegistrationTablet from './Tablet'
-import { Loader } from '../../components'
+import React, { lazy, Suspense, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { authOperations } from "../../redux/auth";
+import { Loader } from '../../components';
 
+const RegistrationMobile = lazy(() => import("./Mobile"));
+const RegistrationTablet = lazy(() => import("./Tablet"));
+const RegistrationDesktop = lazy(() => import("./Desktop"));
 
 export default function Registration() {
   const dispatch = useDispatch();
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const [isValidEmail, setIsValidEmail] = useState(null);
   const [isEqualPassword, setIsEqualPassword] = useState(null);
   const [isPasswordStrong, setIsPasswordStrong] = useState(false);
-
 
   const onChangeNameHandler = (value) => {
     setName(value);
   };
 
   const onChangeEmailHandler = (value) => {
-    setEmail(value)
+    setEmail(value);
   };
 
   const onChangePasswordHandler = (value) => {
@@ -39,9 +38,9 @@ export default function Registration() {
   };
 
   const resetInput = () => {
-    setName('');
-    setEmail('');
-    setPassword('');
+    setName("");
+    setEmail("");
+    setPassword("");
     setIsValidEmail(null);
     setIsEqualPassword(null);
     setIsPasswordStrong(false);
@@ -49,9 +48,7 @@ export default function Registration() {
 
   const onSubmitHandler = () => {
     if (isValidEmail && isEqualPassword) {
-      dispatch(
-        authOperations.register({ name, email, password }),
-      );
+      dispatch(authOperations.register({ name, email, password }));
       resetInput();
     }
   };
@@ -60,33 +57,53 @@ export default function Registration() {
     setIsPasswordStrong(bool);
   };
 
-  const isBtnNotDisable = isValidEmail && isEqualPassword && name && isPasswordStrong;
+  const isBtnNotDisable =
+    isValidEmail && isEqualPassword && name && isPasswordStrong;
 
-  const isLoading = useSelector(state => state.auth.isLoading);
+  const isLoading = useSelector((state) => state.auth.isLoading);
 
-  const params = { name, email, password, isValidEmail, isEqualPassword, isPasswordStrong, onChangeNameHandler, onChangeEmailHandler, onChangePasswordHandler, onChangeConfrimPassHandler, checkStrenthPassHandler, isBtnNotDisable, onSubmitHandler, onBlurEmailHandler };
+  const params = {
+    name,
+    email,
+    password,
+    isValidEmail,
+    isEqualPassword,
+    isPasswordStrong,
+    onChangeNameHandler,
+    onChangeEmailHandler,
+    onChangePasswordHandler,
+    onChangeConfrimPassHandler,
+    checkStrenthPassHandler,
+    isBtnNotDisable,
+    onSubmitHandler,
+    onBlurEmailHandler,
+  };
 
-  const isMobile = useSelector(state => state.isMobile);
-  const isTablet = useSelector(state => state.isTablet);
-  const isDesktop = !isMobile && !isTablet
+  const isMobile = useSelector((state) => state.isMobile);
+  const isTablet = useSelector((state) => state.isTablet);
+  const isDesktop = !isMobile && !isTablet;
 
   const defineDevice = () => {
     if (isMobile) {
       return <RegistrationMobile {...params} />;
     }
     if (isDesktop) {
-      return <RegistrationDesktop {...params} />
+      return <RegistrationDesktop {...params} />;
     }
     if (isTablet) {
-      return <RegistrationTablet {...params} />
+      return <RegistrationTablet {...params} />;
     }
   };
   return (
-    <>
-      {isLoading ? (
-        <Loader />
-      ) : (defineDevice())
-      }
-    </>
-  )
+
+    <Suspense fallback={<h2>Loading...</h2>}>
+      <>
+        {isLoading ? (
+          <Loader />
+        ) : (
+          defineDevice()
+        )}
+      </>
+    </Suspense>
+  );
 }
