@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { bankDataOperations } from '../../redux/bankData';
 import { filterData } from '../../services'
+import Loader from '../Loader'
 import styles from './CurrencyExchange.module.css';
 
 export default function CurrencyExchange() {
@@ -28,7 +29,7 @@ export default function CurrencyExchange() {
     <section className={styles.CurrencyExchange__container}>
       <div className={styles.CurrencyExchange}>
         {isLoading ? (
-          <div>isLoading...</div>// should be changed to Loader-spinner
+          <Loader />
         ) : dataFromBank ? (
           <table className={styles.CurrencyExchange__table}>
             <thead>

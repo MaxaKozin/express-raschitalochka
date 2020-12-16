@@ -1,9 +1,7 @@
 import React, { lazy, Suspense, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { authOperations } from "../../redux/auth";
-// import RegistrationMobile from "./Mobile";
-// import RegistrationDesktop from "./Desktop";
-// import RegistrationTablet from "./Tablet";
+import { Loader } from '../../components';
 
 const RegistrationMobile = lazy(() => import("./Mobile"));
 const RegistrationTablet = lazy(() => import("./Tablet"));
@@ -97,13 +95,11 @@ export default function Registration() {
     }
   };
   return (
+
     <Suspense fallback={<h2>Loading...</h2>}>
       <>
         {isLoading ? (
-          <div style={{ position: "absolute", top: 30, right: 30 }}>
-            {" "}
-            LOADING ...
-          </div> // should be changed to loader-spinner
+          <Loader />
         ) : (
           defineDevice()
         )}
