@@ -12,6 +12,7 @@ import {
   updateTransactionSuccess,
   deleteTransactionRequest,
   deleteTransactionSuccess,
+  getError,
 } from './finance-action';
 import { logoutSuccess } from '../auth/auth-actions';
 
@@ -41,7 +42,8 @@ const isLoading = createReducer(false, {
   [getFinanceSuccess]: () => false,
   [addTransactionSuccess]: () => false,
   [updateTransactionSuccess]: () => false,
-  [deleteTransactionSuccess]: () => false
+  [deleteTransactionSuccess]: () => false,
+  [getError]: () => false,
 });
 
 export default combineReducers({
