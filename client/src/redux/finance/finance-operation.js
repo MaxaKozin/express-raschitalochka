@@ -1,4 +1,5 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 import {
   addTransactionRequest,
   addTransactionSuccess,
@@ -8,6 +9,7 @@ import {
   updateTransactionSuccess,
   deleteTransactionRequest,
   deleteTransactionSuccess,
+  getError,
 } from "./finance-action";
 import { transactionTypes } from "../../common";
 
@@ -21,8 +23,10 @@ const getFinance = () => async (dispatch, getState) => {
     dispatch(getFinanceRequest());
     const data = await axios.get(`api/finance/${_id}`);
     dispatch(getFinanceSuccess(data.data));
+    toast.success("User's finance data loaded successfully")
   } catch (error) {
-    console.error(error);
+    dispatch(getError());
+    toast.error("User's transaction history not loaded, pls try again later")
   }
 };
 
@@ -50,8 +54,10 @@ const addTransaction = (userData) => async (dispatch, getState) => {
     const response = await axios.post(`api/finance/${_id}`, sendData);
 
     dispatch(addTransactionSuccess(response.data));
+    toast.success('Transaction successfully added')
   } catch (error) {
-    console.log(error);
+    dispatch(getError());
+    toast.error('Something going wrong, pls try again later')
   }
 };
 
@@ -65,8 +71,10 @@ const updateTransaction = (transactionId, patchedData) => async (dispatch, getSt
     } = getState();
     const response = await axios.patch(`api/finance/${_id}`, { data: { transactionId, patchedData }, headers: { 'Content-Type': 'application/json' } });
     dispatch(updateTransactionSuccess(response.data))
+    toast.success('Transaction updated');
   } catch (error) {
-    console.log(error);
+    dispatch(getError());
+    toast.error('Transacaction has not been updated, try again later');
   }
 }
 
@@ -81,8 +89,10 @@ const deleteTransaction = (transactionId) => async (dispatch, getState) => {
     } = getState();
     const response = await axios.delete(`api/finance/${_id}`, { data: { transactionId }, headers: { 'Content-Type': 'application/json' } });
     dispatch(deleteTransactionSuccess(response.data))
+    toast.success('Transaction successfully deleted');
   } catch (error) {
-    console.log(error);
+    dispatch(getError());
+    toast.error('Transacaction has not been deleted, try again later')
   }
 }
 

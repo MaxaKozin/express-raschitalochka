@@ -3,6 +3,7 @@ import { createReducer } from '@reduxjs/toolkit';
 import {
   getBankDataRequest,
   getBankDataSuccess,
+  getBankDataError
 } from './bankData-actions';
 import { logoutSuccess } from '../auth/auth-actions';
 
@@ -19,11 +20,10 @@ const data = createReducer(null, {
 const isLoading = createReducer(false, {
   [getBankDataRequest]: () => true,
   [getBankDataSuccess]: () => false,
-  // [getBankDataError]: () => false,
+  [getBankDataError]: () => false,
 });
 
 export default combineReducers({
   data,
-  // error,
   isLoading,
 });

@@ -11,8 +11,7 @@
     "express": "^4.17.1",
     "fs-extra": "^9.0.1",
     "joi": "^17.3.0",
-    "mongoose": "^5.10.13",
-    "victory": "^35.4.3"
+    "mongoose": "^5.10.13"
   },
   "devDependencies": {
     "bcrypt": "^5.0.0",

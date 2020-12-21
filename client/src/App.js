@@ -6,6 +6,7 @@ import {
   setIsMobile,
   setIsTablet,
 } from "./redux/resolution/resolution-operations";
+import Notification from './components/Notification'
 import { PrivateRoute, PublicRoute } from "./common";
 // import * as routes from './constants/routes';
 // import Login from "./views/Login";
@@ -112,6 +113,7 @@ function App() {
             child={AddTransactionMobile}
           />
         </Switch>
+        <Notification />
       </Suspense>
     </>
   );
