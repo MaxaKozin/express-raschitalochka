@@ -9,9 +9,10 @@ const addTransactionController = async (req, res, next) => {
 
     const trLength = user.finance.length;
     const transactions = user.finance || [];
+    console.log(transactions);
 
     if (trLength) {
-      const { balanceAfter } = user.finance[trLength - 1];
+      const { balanceAfter } = user.finance[0];
       const newBalanceAfter =
         transaction.type === "+"
           ? `${Number(balanceAfter) + Number(transaction.amount)}`
@@ -65,70 +66,101 @@ const getFinanceController = async (req, res, next) => {
 
 const updateTransactionController = async (req, res, next) => {
   try {
-    const { transactionId, patchedData } = req.body.data
+    const { transactionId, patchedData } = req.body.data;
     const { userId } = req.params;
     const user = await User.findUserById(userId);
 
-    const findTransaction = user.finance.find(transaction => ("" + transaction._id) === ("" + transactionId));
+    const targetTransaction = user.finance.find(
+      (tr) => "" + tr._id === "" + transactionId
+    );
 
-    if (patchedData.amount !== findTransaction.amount) {
-      const patchedTransaction = new Object(findTransaction)
-      const newBalanceAfter = Number(findTransaction.balanceAfter) + (Number(patchedData.amount) - Number(findTransaction.amount))
-      const patchBalance = {
-        balanceAfter: newBalanceAfter
-      }
-      Object.assign(findTransaction, patchedData, patchBalance)
+    const idx = user.finance.indexOf(targetTransaction);
 
-      await user.finance.splice(user.finance.indexOf(findTransaction), 1, patchedTransaction)
+    if (patchedData.amount !== targetTransaction.amount) {
+      const balanceDiff =
+        patchedData.type === "-"
+          ? Number(targetTransaction.amount) - Number(patchedData.amount)
+          : Number(patchedData.amount) - Number(targetTransaction.amount);
+      const newBalanceAfter =
+        patchedData.type === "-"
+          ? Number(targetTransaction.balanceAfter) +
+            Number(targetTransaction.amount) -
+            Number(patchedData.amount)
+          : Number(targetTransaction.balanceAfter) +
+            Number(patchedData.amount) -
+            Number(targetTransaction.amount);
+      targetTransaction.balanceAfter = `${newBalanceAfter}`;
+      Object.assign(targetTransaction, patchedData);
+      user.totalBalance = `${Number(user.totalBalance) + balanceDiff}`;
+      user.finance.splice(idx, 1, targetTransaction);
+      user.finance.map((tr, index) => {
+        if (index < idx) {
+          tr.balanceAfter = `${Number(tr.balanceAfter) + balanceDiff}`;
+          return tr;
+        }
+        return tr;
+      });
 
       const updatedUser = await User.updateUser(userId, {
         finance: user.finance,
-        totalBalance: patchedTransaction.balanceAfter,
+        totalBalance: user.totalBalance,
       });
-      res.status(200).send(updatedUser)
-      return
+      res.status(200).send(updatedUser);
+      return;
     }
 
-    const patchedTransaction = new Object(findTransaction)
-    Object.assign(patchedTransaction, patchedData)
-    user.finance.splice(user.finance.indexOf(findTransaction), 1, patchedTransaction);
+    Object.assign(targetTransaction, patchedData);
+    user.finance.splice(idx, 1, targetTransaction);
 
-    const updatedUser = await User.updateUser(userId, { finance: user.finance });
+    const updatedUser = await User.updateUser(userId, {
+      finance: user.finance,
+    });
     res.status(200).send(updatedUser);
   } catch (error) {
-    next(error)
+    next(error);
   }
-}
+};
 
 const deleteTransactionController = async (req, res, next) => {
   try {
-    const { transactionId } = req.body
+    const { transactionId } = req.body;
     const { userId } = req.params;
 
     const user = await User.findUserById(userId);
 
-    const newTransactionHistory = user.finance.filter
-      (transaction => '' + transaction._id !== '' + transactionId)
+    const targetTransaction = user.finance.find(
+      (tr) => "" + tr._id === transactionId
+    );
+    const idx = user.finance.indexOf(targetTransaction);
 
-    const deletedTransaction = user.finance.find
-      (transaction => '' + transaction._id === '' + transactionId)
-    let newTotalBalance;
-    if (deletedTransaction.type === '+') {
-      newTotalBalance = Number(user.totalBalance) - Number(deletedTransaction.amount)
-    } else {
-      newTotalBalance = Number(user.totalBalance) + Number(deletedTransaction.amount)
-    }
+    const balanceDiff =
+      targetTransaction.type === "-"
+        ? Number(targetTransaction.amount)
+        : -Number(targetTransaction.amount);
+
+    user.finance.map((tr, index) => {
+      if (index < idx) {
+        tr.balanceAfter = `${Number(tr.balanceAfter) + balanceDiff}`;
+        return tr;
+      }
+      return tr;
+    });
+
+    user.totalBalance = `${Number(user.totalBalance) + balanceDiff}`;
+    const newTransactions = user.finance.filter(
+      (tr) => "" + tr._id !== transactionId
+    );
 
     const updatedUser = await User.updateUser(userId, {
-      finance: newTransactionHistory,
-      totalBalance: newTotalBalance
-    })
+      finance: newTransactions,
+      totalBalance: user.totalBalance,
+    });
 
-    res.status(200).send(updatedUser)
+    res.status(200).send(updatedUser);
   } catch (error) {
-    next(error)
+    next(error);
   }
-}
+};
 
 module.exports = {
   addTransactionController,
