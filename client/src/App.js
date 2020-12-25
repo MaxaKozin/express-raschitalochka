@@ -1,6 +1,7 @@
 import React, { lazy, Suspense, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Switch } from "react-router-dom";
+import { authOperations } from './redux/auth'
 import {
   setIsDesktop,
   setIsMobile,
@@ -8,17 +9,6 @@ import {
 } from "./redux/resolution/resolution-operations";
 import Notification from './components/Notification'
 import { PrivateRoute, PublicRoute } from "./common";
-// import * as routes from './constants/routes';
-// import Login from "./views/Login";
-// import Registration from "./views/Registration";
-// import Home from "./views/Home";
-// import HomeMobile from "./views/Home/Mobile";
-// import Statistics from "./components/Statistics";
-// import {
-//   Dashboard,
-//   CurrencyExchange,
-//   AddTransactionMobile,
-// } from "./components";
 import { income, costs } from "./components/ModalBtn/categoryValues";
 import "./css/styles.css";
 
@@ -40,6 +30,10 @@ function App() {
   const changeWidth = () => {
     setWidth(window.screen.width);
   };
+
+  useEffect(() => {
+    dispatch(authOperations.getCurrentUser())
+  }, [dispatch])
 
   useEffect(() => {
     window.addEventListener("resize", changeWidth);

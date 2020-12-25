@@ -23,7 +23,7 @@ const getFinance = () => async (dispatch, getState) => {
     dispatch(getFinanceRequest());
     const data = await axios.get(`api/finance/${_id}`);
     dispatch(getFinanceSuccess(data.data));
-    toast.success("User's finance data loaded successfully")
+    toast.success("User's transaction history successfully loaded")
   } catch (error) {
     dispatch(getError());
     toast.error("User's transaction history not loaded, pls try again later")

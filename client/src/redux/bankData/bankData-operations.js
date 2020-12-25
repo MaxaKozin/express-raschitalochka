@@ -11,7 +11,7 @@ const getBankData = () => async dispatch => {
       return;
     }
     dispatch(getBankDataSuccess(data));
-    toast.success('currency exchange rates loaded')
+    toast.success('Exchange rates have been loaded successfully')
   } catch (error) {
     dispatch(getBankDataError())
     toast.error('Bank is not responded, currency exchange rates not loaded')

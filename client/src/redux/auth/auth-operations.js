@@ -8,8 +8,9 @@ import {
   loginSuccess,
   logoutSuccess,
   logoutRequest,
-  // getCurrentUserRequest,
-  // getCurrentUserSuccess,
+  getCurrentUserRequest,
+  getCurrentUserSuccess,
+  getCurrentUserError
 } from './auth-actions';
 import { toast } from "react-toastify";
 
@@ -33,7 +34,6 @@ const register = userData => async dispatch => {
     token.set(res.data.token)
     dispatch(registerSuccess(res.data));
   } catch (error) {
-    console.log(error);
     dispatch(getError())
     if (error.message === 'Request failed with status code 409') {
       toast.error('User is already exist')
@@ -75,33 +75,26 @@ const logOut = () => async dispatch => {
   }
 };
 
-// const getCurrentUser = () => async (dispatch, getState) => {
-//   const {
-//     auth: {
-//       token: persistedToken,
-//       user: { id },
-//     },
-//   } = getState();
-//   if (!persistedToken) {
-//     return;
-//   }
-//   token.set(persistedToken);
-//   try {
-//     dispatch(getCurrentUserRequest());
-//     const {
-//       data: {
-//         finance: { totalBalance: balance, data },
-//       },
-//     } = await axios.get(`api/finance/${id}`);
-//     dispatch(getCurrentUserSuccess({ balance, data }));
-//   } catch (error) {
-//     console.error(error);;
-//   }
-// };
+
+const getCurrentUser = () => async (dispatch, getState) => {
+  const { auth: { token: persistedToken }, } = getState();
+  if (!persistedToken) {
+    return;
+  }
+  token.set(persistedToken);
+  try {
+    dispatch(getCurrentUserRequest());
+    const response = await axios.get('api/current');
+    dispatch(getCurrentUserSuccess(response.data));
+  } catch (error) {
+    dispatch(getCurrentUserError());;
+    toast.error('Something going wrong, pls try again later');
+  }
+};
 
 export {
   logOut,
-  // getCurrentUser,
+  getCurrentUser,
   register,
   login,
   token,
