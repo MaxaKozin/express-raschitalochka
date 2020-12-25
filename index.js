@@ -7,9 +7,8 @@ const path = require("path");
 const authRouter = require("./api/auth/auth.router");
 const financeRouter = require("./api/finance/finance.router");
 
-const DB_URI =
-  process.env.DB_URI ||
-  "mongodb+srv://admin:admin@raschitalochka.2v4s4.mongodb.net/raschitalochka-db?retryWrites=true";
+const DB_URI = process.env.DB_URI
+
 
 mongoose.set("useCreateIndex", true);
 
@@ -21,7 +20,7 @@ const serverInit = async () => {
   });
 
   const app = express();
-  const PORT = process.env.PORT || 5000;
+  const PORT = process.env.PORT;
 
   app.use(express.static(path.resolve(__dirname, "public")));
 
