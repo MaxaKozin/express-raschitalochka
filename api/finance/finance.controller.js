@@ -9,7 +9,6 @@ const addTransactionController = async (req, res, next) => {
 
     const trLength = user.finance.length;
     const transactions = user.finance || [];
-    console.log(transactions);
 
     if (trLength) {
       const { balanceAfter } = user.finance[0];
@@ -84,11 +83,11 @@ const updateTransactionController = async (req, res, next) => {
       const newBalanceAfter =
         patchedData.type === "-"
           ? Number(targetTransaction.balanceAfter) +
-            Number(targetTransaction.amount) -
-            Number(patchedData.amount)
+          Number(targetTransaction.amount) -
+          Number(patchedData.amount)
           : Number(targetTransaction.balanceAfter) +
-            Number(patchedData.amount) -
-            Number(targetTransaction.amount);
+          Number(patchedData.amount) -
+          Number(targetTransaction.amount);
       targetTransaction.balanceAfter = `${newBalanceAfter}`;
       Object.assign(targetTransaction, patchedData);
       user.totalBalance = `${Number(user.totalBalance) + balanceDiff}`;

@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt');
 const User = require('../user/user.model');
 const { tokenCreate, tokenVerify } = require('../../services/jwt.service');
 
-const SALT_ROUNDS = process.env.SALT_ROUNDS || 10;
+const SALT_ROUNDS = process.env.SALT_ROUNDS || 10
 
 const registrationController = async (req, res, next) => {
   try {
