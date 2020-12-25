@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const User = require('../user/user.model');
-const { tokenCreate } = require('../../services/jwt.service');
+const { tokenCreate, tokenVerify } = require('../../services/jwt.service');
 
 const SALT_ROUNDS = process.env.SALT_ROUNDS || 10;
 
@@ -64,8 +64,24 @@ const logoutController = async (req, res, next) => {
   }
 };
 
+const getCurrentUserController = async (req, res, next) => {
+  try {
+    const verificationToken = req.get("Authorization");
+    const { id } = await tokenVerify(verificationToken)
+    const user = await User.findUserById(id)
+    if (!user) {
+      res.status(400).send('User not found');
+      return
+    }
+    res.status(200).send(user);
+  } catch (error) {
+    next(error)
+  }
+}
+
 module.exports = {
   registrationController,
   loginController,
   logoutController,
+  getCurrentUserController
 };
