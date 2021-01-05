@@ -1,0 +1,54 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+}
+
+.logo {
+  padding: 0;
+  margin: 0 12px 0 0;
+}
+
+@media (min-width: 320px) and (max-width: 767px) {
+  .header {
+    padding: 10px 0;
+    background-color: var(--mobile-header-darkgreen-color);
+  }
+
+  .container {
+    width: 310px;
+    margin: 0 auto;
+  }
+
+  .appName {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .header {
+    padding: 14px 0;
+    margin-bottom: 10px;
+    box-shadow: 1.5px 2.598px 3px 0px rgba(1, 1, 0, 0.12);
+  }
+  .headerNameBox {
+    display: flex;
+  }
+
+  .appName {
+    padding-top: 7px;
+    color: var(--main-dark-color);
+    font-family: var(--bold-ff);
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    width: 100%;
+  }
+  .header {
+    margin-bottom: 20px;
+  }
+}

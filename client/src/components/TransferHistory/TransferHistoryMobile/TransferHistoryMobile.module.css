@@ -1,0 +1,28 @@
+.list {
+  list-style: none;
+  margin: 0 auto 85px;
+}
+
+.listItem {
+  box-shadow: 5px 5px 5px 0px rgba(235, 235, 235, 1);
+  margin-bottom: 15px;
+}
+
+.listItemRow {
+  display: flex;
+  padding-left: 15px;
+  height: 45px;
+}
+
+.listItemRow:nth-child(odd) {
+  background-color: #f3f6f6;
+}
+
+.listItemRow p {
+  width: 50%;
+  font-weight: 300;
+  color: #363636;
+  font-size: 13px;
+  display: flex;
+  margin: auto;
+}

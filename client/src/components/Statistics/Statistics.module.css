@@ -1,0 +1,36 @@
+.Title {
+  display: none;
+  text-transform: uppercase;
+  padding: 30px;
+  margin: 0;
+  background-color: #516d57;
+  font-family: "HelveticaNeueCyr Bold";
+  font-size: 15px;
+  line-height: 30px;
+  color: #fff;
+  border-radius: 4px 4px 0 0;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+@media screen and (min-width: 768px) {
+  .Title {
+    display: block;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .Statistics {
+    box-shadow: 10px 17.321px 40px 0px rgba(1, 1, 0, 0.15);
+    border-radius: 4px;
+  }
+  .Wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 40px 0;
+  }
+  .Title {
+    margin-bottom: 0;
+  }
+}
