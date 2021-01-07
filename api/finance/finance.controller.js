@@ -26,14 +26,15 @@ const addTransactionController = async (req, res, next) => {
     }
 
     if (!trLength) {
+      const newBalance = transaction.type === "+" ? `${transaction.amount}` : `-${transaction.amount}`;
       const newTransaction = {
         ...transaction,
-        balanceAfter: transaction.amount,
+        balanceAfter: newBalance,
       };
       transactions.unshift(newTransaction);
       await User.updateUser(req.user._id, { finance: transactions });
       await User.updateUser(req.user._id, {
-        totalBalance: `${newTransaction.amount}`,
+        totalBalance: newBalance,
       });
     }
 
