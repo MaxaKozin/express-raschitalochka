@@ -7,7 +7,8 @@ import {
   setIsMobile,
   setIsTablet,
 } from "./redux/resolution/resolution-operations";
-import Notification from './components/Notification'
+import Notification from './components/Notification';
+import { Loader } from './components'
 import { PrivateRoute, PublicRoute } from "./common";
 import { income, costs } from "./components/ModalBtn/categoryValues";
 import "./css/styles.css";
@@ -51,7 +52,7 @@ function App() {
 
   return (
     <>
-      <Suspense fallback={<h2>Loading...</h2>}>
+      <Suspense fallback={<Loader />}>
         <Switch>
           <PublicRoute
             path={"/login"}
