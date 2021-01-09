@@ -1,5 +1,5 @@
-import React from 'react';
-import { AppBar, NavBar, CurrencyExchange, TotalBalance } from '../../../components';
+import React, { Suspense } from 'react';
+import { AppBar, NavBar, CurrencyExchange, TotalBalance, Loader } from '../../../components';
 import styles from './HomeDesktop.module.css'
 
 
@@ -13,9 +13,11 @@ export default function HomeDesktop({ children }) {
           <TotalBalance />
           <CurrencyExchange />
         </div>
-        <div className={styles.content}>
-          {children}
-        </div>
+        <Suspense fallback={<Loader />}>
+          <div className={styles.content}>
+            {children}
+          </div>
+        </Suspense>
       </div>
     </>
   )

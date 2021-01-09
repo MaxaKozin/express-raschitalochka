@@ -1,5 +1,5 @@
-import React from 'react';
-import { AppBar, NavBar } from '../../../components';
+import React, { Suspense } from 'react';
+import { AppBar, NavBar, Loader } from '../../../components';
 
 
 export default function HomeMobile({ children }) {
@@ -7,7 +7,9 @@ export default function HomeMobile({ children }) {
     <>
       <AppBar />
       <NavBar />
-      {children}
+      <Suspense fallback={<Loader />}>
+        {children}
+      </Suspense>
     </>
   )
 }

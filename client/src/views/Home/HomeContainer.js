@@ -13,19 +13,15 @@ export default function Home({ children }) {
   const isMobile = useSelector((state) => state.isMobile);
   const isTablet = useSelector((state) => state.isTablet);
   return (
+    <>
+      {isMobile ? (
+        <HomeMobile children={children} />
+      ) : isTablet ? (
+        <HomeTablet children={children} />
+      ) : (
+            <HomeDesktop children={children} />
+          )}
+    </>
 
-    <Suspense fallback={<h2>Loading...</h2>}>
-      <>
-        {isLoading ? (
-          <Loader />
-        ) : isMobile ? (
-          <HomeMobile children={children} />
-        ) : isTablet ? (
-          <HomeTablet children={children} />
-        ) : (
-          <HomeDesktop children={children} />
-        )}
-      </>
-    </Suspense>
   );
 }

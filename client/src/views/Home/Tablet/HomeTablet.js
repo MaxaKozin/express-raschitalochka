@@ -1,5 +1,5 @@
-import React from 'react';
-import { AppBar, NavBar, TotalBalance } from '../../../components';
+import React, { Suspense } from 'react';
+import { AppBar, NavBar, TotalBalance, Loader } from '../../../components';
 import styles from './HomeTablet.module.css'
 
 
@@ -12,9 +12,11 @@ export default function HomeTablet({ children }) {
           <NavBar />
           <TotalBalance />
         </div>
-        <div className={styles.content}>
-          {children}
-        </div>
+        <Suspense fallback={<Loader />}>
+          <div className={styles.content}>
+            {children}
+          </div>
+        </Suspense>
       </div>
     </>
   )
