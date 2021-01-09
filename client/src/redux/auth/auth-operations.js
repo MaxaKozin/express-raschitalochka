@@ -14,7 +14,7 @@ import {
 } from './auth-actions';
 import { toast } from "react-toastify";
 
-axios.defaults.baseURL = 'http://localhost:5000';
+axios.defaults.baseURL = 'https://mernstackrasschitalochka.herokuapp.com';
 
 const token = {
   set(token) {
